@@ -4,10 +4,6 @@ A
 :
 
 index.html,f\6\f6013a00b362253c64368d6eebc50ea2131754e2
-7
-Main.js,f\e\fe97665b5e200d47701a7e38baadafb4b96781de
-7
-main.js,c\4\c4a4248f7568c9e41265502c39b0daeb8b635431
 <
 package.json,7\0\7030d0b2f71b999ff89a343de08c414af32fc93a
 <
@@ -28,3 +24,13 @@ w
 G.idea/sonarlint/issuestore/f/e/fe97665b5e200d47701a7e38baadafb4b96781de,5\2\52450a8f1d3e7cbb811e583d40d7e0059d4bcce8
 
 Q.idea/sonarlint/securityhotspotstore/f/e/fe97665b5e200d47701a7e38baadafb4b96781de,7\3\7362cedd5c1d8ac1aee28972ade3f7f385f0c9f9
+8
+index.js,a\7\a77b15c0d64cf6111e025645e562faf8ccabb9d7
+>
+src/index.html,5\c\5c975582791da6f060261188096d6aad85db6e09
+<
+src/index.js,f\9\f900edc44cb929c2267a16100a32851f6d5b477d
+E
+src/ProductManager.js,5\0\50ecbccf068b6bfad9900758881f612511fd612d
+@
+src/ejemplo.json,8\c\8c3eb59175f92b0934dcf8024eed27b215d6b5ea
