@@ -1,33 +1,35 @@
-import fs  from 'fs';
+import fs from 'fs';
 
 
 export class ProductManager {
-    path = './src/ejemplo.json';
-
-    constructor() {
-        this.products = [];
-
-    }
+    path = './src/data/products.json';
 
 
     addProduct(product) {
-        if (!product.title || !product.description || !product.price || !product.thumbnail || !product.stock || !product.code) {
-            console.error("Faltan datos");
-        } else if (this.products.some(prod => prod.code === product.code)) {
-            console.error("El producto ya existe");
+        if (!fs.existsSync(this.path)) {
+            fs.writeFileSync(this.path, '[]');
         } else {
-            product.id = this.products.length + 1;
-            this.products.push(product);
-            fs.writeFileSync(this.path, JSON.stringify(this.products));
-            return "Producto agregados"
+            let contenido = JSON.parse(fs.readFileSync(this.path, 'utf8'));
+            if (!product.title || !product.description || !product.price || !product.thumbnail || !product.stock || !product.code) {
+                console.error("Faltan datos");
+            } else if (contenido.some(prod => prod.code === product.code)) {
+                return "El producto ya existe";
+            } else {
+                product.id = contenido.length + 1;
+                product.status = true;
+                contenido.push(product);
+                console.log(contenido);
+                fs.writeFileSync(this.path, JSON.stringify(contenido));
+                return "Producto agregado"
+            }
         }
+
     }
 
 
     getProducts() {
         let contenido = fs.readFileSync(this.path, 'utf8');
-       return  JSON.parse(contenido)
-
+        return JSON.parse(contenido)
     }
 
     getProductById(id) {
@@ -37,7 +39,7 @@ export class ProductManager {
         if (JsonContenido.find(prod => prod.id === pId) === undefined) {
             return "El producto no existe"
         } else {
-           return JsonContenido.find(prod => prod.id === pId)
+            return JsonContenido.find(prod => prod.id === pId)
         }
 
     }
@@ -45,17 +47,16 @@ export class ProductManager {
     putProductById(id, product) {
         let contenido = fs.readFileSync(this.path, 'utf8');
         let JsonContenido = JSON.parse(contenido);
-        let index = JsonContenido.findIndex(prod => prod.id === id);
-        if (JsonContenido[index] === undefined) {
+        if (JsonContenido[id - 1] === undefined) {
             return "El producto no existe"
         } else {
             let params = Object.keys(product);
             params.forEach(param => {
-                JsonContenido[index][param] = product[param];
+                JsonContenido[id - 1][param] = product[param];
             });
-            JsonContenido[index].id = id;
+            JsonContenido[id - 1].id = id;
             fs.writeFileSync(this.path, JSON.stringify(JsonContenido));
-            return JsonContenido[index]
+            return JsonContenido[id - 1]
         }
     }
 

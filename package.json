@@ -5,8 +5,8 @@
   "type": "module",
   "main": "./src/index.js",
   "scripts": {
-    "devNodemon": "nodemon index.js",
-    "devNode": "node --watch index.js"
+    "devNodemon": "nodemon src/index.js",
+    "devNode": "node --watch src/index.js"
   },
   "keywords": [],
   "author": "",
