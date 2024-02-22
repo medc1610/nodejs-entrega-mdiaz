@@ -9,8 +9,6 @@ G.idea/sonarlint/issuestore/7/0/7030d0b2f71b999ff89a343de08c414af32fc93a,9\d\9d
 src/index.js,f\9\f900edc44cb929c2267a16100a32851f6d5b477d
 E
 src/ProductManager.js,5\0\50ecbccf068b6bfad9900758881f612511fd612d
-@
-src/ejemplo.json,8\c\8c3eb59175f92b0934dcf8024eed27b215d6b5ea
 Å
 Q.idea/sonarlint/securityhotspotstore/9/a/9ab775a45cd57b8b48016a1df33230d8b5c74c21,f\4\f48722a4c62275a520980d0767b919b94dc907f9
 Å
@@ -118,8 +116,6 @@ Y
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
 M
 src/routes/products-router.js,b\0\b04c80bad82c4cf1d11fbb3295bec7f79112af41
-I
-src/routes/cart-routes.js,e\8\e899d4be3b53d6215d29a9f413138075589ce7e0
 B
 src/CartManager.js,2\4\248be9d45268ceb0fb09cf59fb93572145eadb64
 I
@@ -128,3 +124,33 @@ F
 src/data/products.json,8\c\8c1db540088e97e4fbfc34f59a5b298ef6835dc0
 B
 src/data/cart.json,2\1\210d34c82b20ec00730255ba21709c800cf97f17
+Q
+!src/views/layouts/main.handlebars,7\f\7f9f6be7c2a067221bb2fa885e3e7bfc8fd6f5a7
+T
+$src/views/partials/footer.handlebars,5\0\50be4d887dbb78984c47695bf71a428f3a2e170d
+T
+$src/views/partials/navbar.handlebars,b\9\b9a10c4583c0903e6abc3b1ecdf8ed6efe22c4ff
+I
+src/views/home.handlebars,e\b\eb4493cc3a2f487da36a39f7e103721ccd3aaf69
+M
+src/views/products.handlebars,e\7\e7b92acd88105bdf98a1000bc3e49e3f5f291f90
+;
+src/path.js,e\3\e3a80c3d002f2a115a88cd320bf7c8a62901b5fd
+H
+src/public/css/homce.css,e\8\e88f42e681d4c472adf90b8d0365c4750ce2704b
+K
+src/public/css/products.css,3\0\30693adfba60b7d67b91ac449b3b286ac61cc503
+D
+src/config/multer.js,6\0\60d3436432073b20c47455e8a587cda8da2902eb
+G
+src/public/css/home.css,d\5\d5b64c488ed2b089e9ee662611a8e06a00032a6d
+E
+src/public/js/main.js,9\9\992bc800450718fff0c3b750a3ee3ff4791b2795
+W
+'src/views/templates/products.handlebars,e\e\ee7b41e7e44e898f6eb5a63bea31e92b93e17be0
+I
+src/config/CartManager.js,b\f\bf81e08acf80be44cc0cf848609897c793f6d93b
+L
+src/config/ProductManager.js,c\5\c50e63f27d210799562c0db7384cea947fc30d20
+S
+#src/views/templates/home.handlebars,3\0\300002a10a615366affbb9e0417708c16122eae2
