@@ -9,8 +9,6 @@ G.idea/sonarlint/issuestore/7/0/7030d0b2f71b999ff89a343de08c414af32fc93a,9\d\9d
 src/index.js,f\9\f900edc44cb929c2267a16100a32851f6d5b477d
 E
 src/ProductManager.js,5\0\50ecbccf068b6bfad9900758881f612511fd612d
-@
-src/ejemplo.json,8\c\8c3eb59175f92b0934dcf8024eed27b215d6b5ea
 Å
 Q.idea/sonarlint/securityhotspotstore/9/a/9ab775a45cd57b8b48016a1df33230d8b5c74c21,f\4\f48722a4c62275a520980d0767b919b94dc907f9
 Å
@@ -19,10 +17,6 @@ w
 G.idea/sonarlint/issuestore/5/0/50ecbccf068b6bfad9900758881f612511fd612d,3\e\3e7ee3c084cf20d3581f6329da1b8d928728f198
 Å
 Q.idea/sonarlint/securityhotspotstore/5/0/50ecbccf068b6bfad9900758881f612511fd612d,7\1\71c8f6a6e4034d8dd6c1fe307c7bc538939ff517
-Å
-Q.idea/sonarlint/securityhotspotstore/8/c/8c3eb59175f92b0934dcf8024eed27b215d6b5ea,7\b\7b661cecc037c726c41942f51aaaa05e6f67d7f3
-w
-G.idea/sonarlint/issuestore/8/c/8c3eb59175f92b0934dcf8024eed27b215d6b5ea,0\0\00f5abc37d88dcd1f689ce09b9b4fe3242f2b03e
 A
 package-lock.json,f\a\fa288d1472d29beccb489a676f68739ad365fc47
 S
@@ -118,8 +112,6 @@ Y
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
 M
 src/routes/products-router.js,b\0\b04c80bad82c4cf1d11fbb3295bec7f79112af41
-I
-src/routes/cart-routes.js,e\8\e899d4be3b53d6215d29a9f413138075589ce7e0
 B
 src/CartManager.js,2\4\248be9d45268ceb0fb09cf59fb93572145eadb64
 I
