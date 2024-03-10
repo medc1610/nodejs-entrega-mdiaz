@@ -1,0 +1,11 @@
+{{#if mostrarProductos}}
+  {{#each prods}}
+    <div>
+      <p>{{this.title}}</p>
+      <p>{{this.price}}</p>
+      <img height="100" src={{this.img}}>
+    </div>
+  {{/each}}
+{{else}}
+  <p>No hay productos</p>
+{{/if}}

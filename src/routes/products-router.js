@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import {ProductManager} from "../ProductManager.js";
+import {ProductManager} from "../config/ProductManager.js";
 
 const productManager = new ProductManager('./src/data/products.json');
 
@@ -12,12 +12,21 @@ productsRouter.get('/', (req, res) => {
     if (limit) {
         if (parseInt(limit)) {
             const prodsLimit = products.slice(0, limit);
-            res.send(prodsLimit)
+            res.render('templates/products', {
+                mostrarProductos: true,
+                prods: prodsLimit,
+                css: 'home.css',
+            })
         } else {
             res.send("No se encontraron productos")
         }
     } else {
-        res.send(products)
+        res.render('templates/products', {
+            mostrarProductos: true,
+            prods: products,
+            css: 'home.css',
+        })
+
     }
 
 });
