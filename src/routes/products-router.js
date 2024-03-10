@@ -22,6 +22,7 @@ productsRouter.get('/', (req, res) => {
         }
     } else {
         res.render('templates/products', {
+
             mostrarProductos: true,
             prods: products,
             css: 'home.css',
