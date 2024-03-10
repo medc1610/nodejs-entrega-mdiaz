@@ -1,6 +1,7 @@
 import express from 'express';
 import productRouter from './routes/products-router.js';
 import cartRouter from './routes/cart-router.js';
+import chatRouter from './routes/chat-router.js';
 import { engine } from 'express-handlebars'
 import { Server } from 'socket.io';
 import { __dirname } from './path.js'
@@ -12,20 +13,17 @@ const server = app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
 
-const io = new Server(server);
 
+const io = new Server(server);
+const messages = [];
 io.on('connection', (socket) => {
     console.log('conexión con socket.io');
+    socket.on('mensaje', info => {
+        messages.push(info);
+        io.sockets.emit('mensajes', messages);
 
-    socket.on('movimiento', info => {
-        console.log(info);
-    });
+    })
 
-    socket.on('rendirse', info => {
-        console.log(info);
-        socket.emit('mensaje-jugador', 'Te has rendido');
-        socket.broadcast.emit('rendicion', 'El jugador se rindió');
-    });
 });
 
 app.use(express.json());
@@ -33,12 +31,18 @@ app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
 app.set('views', __dirname + '/views');
 
+app.use(express.static('public', {
+    setHeaders: function (res, path) {
+        const type = mime.lookup(path);
+        res.setHeader('Content-Type', type);
+    }
+}));
 app.use('/static', express.static(__dirname + '/public'))
 app.use('/api/products/', productRouter, express.static(__dirname + '/public'));
 app.use('/api/cart/', cartRouter);
-app.get('/', (req, res) => {
-    res.send('Hello World');
-})
+app.use('/api/chat', chatRouter, express.static(__dirname + '/public'));
+
+
 app.post('/upload', upload.single('product'), (req, res) => {
     try {
         console.log(req.file)
