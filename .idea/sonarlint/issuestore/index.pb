@@ -11,10 +11,6 @@ G.idea/sonarlint/issuestore/7/0/7030d0b2f71b999ff89a343de08c414af32fc93a,9\d\9d
 Q.idea/sonarlint/securityhotspotstore/9/a/9ab775a45cd57b8b48016a1df33230d8b5c74c21,f\4\f48722a4c62275a520980d0767b919b94dc907f9
 Å
 Q.idea/sonarlint/securityhotspotstore/9/d/9d19eaab4327edc07435a682d68ef383811840e5,0\5\05ab750dbd0e11b58c2d57a6390647bee6c3f329
-w
-G.idea/sonarlint/issuestore/5/0/50ecbccf068b6bfad9900758881f612511fd612d,3\e\3e7ee3c084cf20d3581f6329da1b8d928728f198
-Å
-Q.idea/sonarlint/securityhotspotstore/5/0/50ecbccf068b6bfad9900758881f612511fd612d,7\1\71c8f6a6e4034d8dd6c1fe307c7bc538939ff517
 A
 package-lock.json,f\a\fa288d1472d29beccb489a676f68739ad365fc47
 S
@@ -144,3 +140,13 @@ S
 #src/views/templates/chat.handlebars,2\9\29c13b8877dfcda9d69c1fa9d67377a50d479744
 I
 src/routes/chat-router.js,8\c\8cb29f5ba7f8e4b0239e34ff1c3c5c401d7de268
+B
+src/models/user.js,f\b\fbb8f242f787683ca7d8f88043f356d424f5b81b
+I
+src/routes/user-router.js,0\a\0a8f9d14bbfa3a59976d8e8a626e6f3fa6c28ed1
+E
+src/models/product.js,a\1\a1b0ee0cf33fbf1bdc54e4241989c8a55d42310c
+B
+src/models/cart.js,8\3\8336599751eae380af1531204f4e7f1d37e826f7
+F
+src/models/messages.js,5\a\5a52788772e7a6f849313612c8ebe8337e42aeda

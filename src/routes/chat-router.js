@@ -8,5 +8,4 @@ chatRouter.get('/', (req, res) => {
     });
 })
 
-
 export default chatRouter;
