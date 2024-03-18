@@ -26,7 +26,6 @@ mongoose.connect("mongodb+srv://medc1610:medc123456@cluster0.v6ayc2x.mongodb.net
     .then(() => console.log('Conectado MongoDB'))
     .catch(error => console.log(error))
 
-const resultado = await orderModel.paginate({status:true}, {page: 1, limit: 10, sort: {price:'desc'}});
 
 io.on('connection', (socket) => {
     console.log('conexión con socket.io');
