@@ -150,3 +150,5 @@ B
 src/models/cart.js,8\3\8336599751eae380af1531204f4e7f1d37e826f7
 F
 src/models/messages.js,5\a\5a52788772e7a6f849313612c8ebe8337e42aeda
+J
+src/routes/index-router.js,4\b\4b66f0de2f3db00c24c0fba58485f11706aafc78

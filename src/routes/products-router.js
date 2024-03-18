@@ -1,67 +1,94 @@
 import {Router} from 'express';
-import {ProductManager} from "../config/ProductManager.js";
-import  productModel from '../models/product.js';
+import { productModel } from '../models/product.js';
 
-const productManager = new ProductManager('./src/data/products.json');
 
 const productsRouter = Router();
 
+productsRouter.get('/', async (req, res) => {
 
-productsRouter.get('/', (req, res) => {
-    const {limit} = req.query;
-    // const products = productManager.getProducts();
-    const products = productModel.find();
-    if (limit) {
-        if (parseInt(limit)) {
-            const prodsLimit = products.slice(0, limit);
-            res.render('templates/products', {
-                mostrarProductos: true,
-                prods: prodsLimit,
-                css: 'home.css',
-            })
-        } else {
-            res.send("No se encontraron productos")
+    try {
+        const {limit, page, filter, sort} = req.query;
+        let metFilter;
+        const pag = page !== undefined ? page : 1;
+        const lim = limit !== undefined ? limit : 10;
+        const order = sort !== undefined ? sort : 'asc';
+
+        if(typeof filter === 'boolean'){
+            metFilter = 'status'
+        } else if (filter !== undefined){
+            metFilter = 'category'
         }
-    } else {
-        res.render('templates/products', {
 
-            mostrarProductos: true,
-            prods: products,
-            css: 'home.css',
-        })
+        const query = metFilter ? { [metFilter]: filter } : {};
+        const products = await productModel.paginate({metFilter: filter}, {limit:lim, page:pag, sort: {price: order}});
 
+        res.status(200).send(products);
+        // const prodsLimit = products.slice(0, limite);
+        // res.render('templates/products', {
+        //     mostrarProductos: true,
+        //     prods: prodsLimit,
+        //     css: 'home.css',
+        // })
+    } catch (error) {
+        res.status(500).send(`Error: ${error}`);
+    }
+
+
+
+});
+
+productsRouter.get('/:id', async(req, res) => {
+    try {
+        const id = req.params.id;
+        const product = await productModel.findById(id);
+        if (product) {
+            res.status(200).send(product);
+        } else {
+            res.status(404).send('Producto no encontrado');
+        }
+    } catch (error) {
+        res.status(500).send(`Error: ${error}`);
+
+    }
+
+})
+
+productsRouter.post('/', async (req, res) => {
+
+    try {
+        const product = req.body;
+        // const result = productManager.addProduct(product);
+         const result =   await productModel.create(product);
+       res.send(product);
+    }
+    catch (error) {
+
+        res.status(500).send(`Error: ${error}`);
     }
 
 });
 
-productsRouter.get('/:id', (req, res) => {
-    const {id} = req.params;
-    // const product = productManager.getProductById(id);
-    const product = productModel.findById(id);
-    res.send(product);
-})
-
-productsRouter.post('/', (req, res) => {
-    console.log(req.body)
-    const product = req.body;
-    // const result = productManager.addProduct(product);
-    const result = productModel.create(product);
-    res.send(result);
+productsRouter.put('/:id', async(req, res) => {
+    try {
+        const id = req.params.id;
+        const product = req.body;
+        const result = await productModel.findByIdAndUpdate(id, product);
+        res.send(result);
+    } catch (error) {
+        res.status(500).send(`Error: ${error}`);
+    }
 });
 
-productsRouter.put('/:id', (req, res) => {
-    const {id} = req.params;
-    const product = req.body;
-    // const result = productManager.putProductById(id, product);
-    const result = productModel.findByIdAndUpdate(id, product);
-    res.send(result);
-});
+productsRouter.delete('/:id', async(req, res) => {
+    try {
+        const id = req.params.id;
+        const result = await productModel.findByIdAndDelete(id);
+        res.send(result);
+    }
+    catch (error) {
+        res.status(500).send(`Error: ${error}`);
+    }
 
-productsRouter.delete('/:id', (req, res) => {
-    const {id} = req.params;
-    // const result = productManager.deleteProductById(id);
-    const result = productModel.findByIdAndDelete(id);
-    res.send(result);
 })
 
 export default productsRouter;

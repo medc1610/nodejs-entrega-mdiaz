@@ -8,6 +8,9 @@ import { Server } from 'socket.io';
 import { __dirname } from './path.js'
 import upload from './config/multer.js';
 import mongoose from 'mongoose';
+import { messageModel } from './models/messages.js';
+import orderModel from 'mongoose-paginate-v2';
+
 
 const app = express();
 const PORT = 8080;
@@ -23,12 +26,15 @@ mongoose.connect("mongodb+srv://medc1610:medc123456@cluster0.v6ayc2x.mongodb.net
     .then(() => console.log('Conectado MongoDB'))
     .catch(error => console.log(error))
 
-const messages = [];
+const resultado = await orderModel.paginate({status:true}, {page: 1, limit: 10, sort: {price:'desc'}});
+
 io.on('connection', (socket) => {
     console.log('conexión con socket.io');
-    socket.on('mensaje', info => {
-        messages.push(info);
-        io.sockets.emit('mensajes', messages);
+
+    socket.on('mensaje', mensaje => {
+        messageModel.create(mensaje);
+        const mensajes = messageModel.find();
+        io.sockets.emit('mensajes', mensajes);
 
     })
 
@@ -56,19 +62,19 @@ app.post('/upload', upload.single('product'), (req, res) => {
     }
 })
 
-app.get('/static', (req, res) => {
-    const prods = [
-        {id: 1, title: "producto1", price: 7500, img: "https://definicion.de/wp-content/uploads/2009/06/producto.png"},
-        {id: 2, title: "producto2", price: 10000, img: "https://definicion.de/wp-content/uploads/2009/06/producto.png"},
-        {id: 3, title: "producto3", price: 3500, img: "https://definicion.de/wp-content/uploads/2009/06/producto.png"},
-        {id: 4, title: "producto4", price: 48000, img: "https://definicion.de/wp-content/uploads/2009/06/producto.png"}
-    ]
-
-    res.render('templates/products', {
-        mostrarProductos: true,
-        prods: prods,
-        css: 'home.css',
-    })
-});
+// app.get('/static', (req, res) => {
+//     const prods = [
+//         {id: 1, title: "producto1", price: 7500, img: "https://definicion.de/wp-content/uploads/2009/06/producto.png"},
+//         {id: 2, title: "producto2", price: 10000, img: "https://definicion.de/wp-content/uploads/2009/06/producto.png"},
+//         {id: 3, title: "producto3", price: 3500, img: "https://definicion.de/wp-content/uploads/2009/06/producto.png"},
+//         {id: 4, title: "producto4", price: 48000, img: "https://definicion.de/wp-content/uploads/2009/06/producto.png"}
+//     ]
+//
+//     res.render('templates/products', {
+//         mostrarProductos: true,
+//         prods: prods,
+//         css: 'home.css',
+//     })
+// });
 
 
