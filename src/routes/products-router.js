@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import { productModel } from '../models/product.js';
+import  productModel  from '../models/product.js';
 
 
 const productsRouter = Router();
@@ -13,16 +13,17 @@ productsRouter.get('/', async (req, res) => {
         const lim = limit !== undefined ? limit : 10;
         const order = sort !== undefined ? sort : 'asc';
 
-        if(typeof filter === 'boolean'){
+        if(filter === 'true' || filter === 'false'){
             metFilter = 'status'
-        } else if (filter !== undefined){
+        } else if( filteer !== undefined){
             metFilter = 'category'
         }
 
         const query = metFilter ? { [metFilter]: filter } : {};
-        const products = await productModel.paginate({metFilter: filter}, {limit:lim, page:pag, sort: {price: order}});
+        const ordquery = order !== undefined ? `sort: { price : ${order}}`:""
+        const products = await productModel.paginate(query, {limit:lim, page:pag, sort: ordquery});
 
-        res.status(200).send(products);
+        res.status(200).send(products.docs);
         // const prodsLimit = products.slice(0, limite);
         // res.render('templates/products', {
         //     mostrarProductos: true,
