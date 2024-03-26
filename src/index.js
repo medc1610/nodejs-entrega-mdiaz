@@ -10,6 +10,9 @@ import upload from './config/multer.js';
 import mongoose from 'mongoose';
 import { messageModel } from './models/messages.js';
 import orderModel from 'mongoose-paginate-v2';
+import cookieParser from 'cookie-parser';
+import session from 'express-session';
+import MongoStore from 'connect-mongo';
 
 
 const app = express();
@@ -28,6 +31,15 @@ mongoose.connect("mongodb+srv://medc1610:medc123456@cluster0.v6ayc2x.mongodb.net
 
 // const resultado = await orderModel.paginate({status:true}, {page: 1, limit: 10, sort: {price:'desc'}});
 
+app.post('/login', (req, res) => {
+    const {email, password} = req.body;
+    if (email == "admin@admin.com" && password == "1234") {
+        req.session.email = email;
+        req.session.password = password;
+        return res.send('Usuario logueado')
+    }
+})
+
 io.on('connection', (socket) => {
     console.log('conexión con socket.io');
 
@@ -41,6 +53,19 @@ io.on('connection', (socket) => {
 });
 
 app.use(express.json());
+
+
+app.use(session({
+    secret: 'codeSecret',
+    resave: true,
+    store: MongoStore.create({
+        mongoUrl:  'mongodb+srv://medc1610:medc123456@cluster0.v6ayc2x.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0',
+        ttl: 600
+
+    }),
+    saveUninitialized: true
+}))
+app.use(cookieParser("clave secreta"));
 app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
 app.set('views', __dirname + '/views');
@@ -51,7 +76,31 @@ app.use('/api/products/', productRouter, express.static(__dirname + '/public'));
 app.use('/api/cart/', cartRouter);
 app.use('/api/chat', chatRouter, express.static(__dirname + '/public'));
 app.use('/api/user', userRouter);
+app.use(session())
 
+//cookies
+app.get('/setCookie', (req, res) => {
+    res.cookie('CookieCookie', 'cookie', {maxAge: 3000000, signed: true}).send('Cookie seteada')
+});
+
+app.get('/getCookie', (req, res) => {
+    res.send(req.signedCookies)
+});
+
+app.get('/deleteCookie', (req, res) => {
+    res.clearCookie('CookieCookie', '', {expires: new Date(0)})
+});
+
+//sessions
+app.get('/setSession', (req, res) => {
+    if (req.session.counter) {
+        req.session.counter++;
+        res.send(`Has visitado esta página ${req.session.counter} veces`)
+    } else {
+        req.session.counter = 1;
+        res.send("sos el primer usuario en ingresar")
+    }
+});
 
 app.post('/upload', upload.single('product'), (req, res) => {
     try {
