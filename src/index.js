@@ -76,6 +76,7 @@ app.use('/api/products/', productRouter, express.static(__dirname + '/public'));
 app.use('/api/cart/', cartRouter);
 app.use('/api/chat', chatRouter, express.static(__dirname + '/public'));
 app.use('/api/user', userRouter);
+app.use('/api/session', sessionRouter);
 app.use(session())
 
 //cookies
