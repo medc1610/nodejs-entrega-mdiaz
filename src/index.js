@@ -13,6 +13,8 @@ import orderModel from 'mongoose-paginate-v2';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
+import initializePassport from './config/passport/strategies/passport.js';
+import passport from 'passport';
 
 
 const app = express();
@@ -69,6 +71,11 @@ app.use(cookieParser("clave secreta"));
 app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
 app.set('views', __dirname + '/views');
+
+
+initializePassport()
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 app.use('/static', express.static(__dirname + '/public'))

@@ -154,3 +154,7 @@ J
 src/routes/index-router.js,4\b\4b66f0de2f3db00c24c0fba58485f11706aafc78
 L
 src/routes/session-router.js,4\f\4f064531689ad75f2d9e2415dc89d876e3473929
+C
+src/utils/bcrypt.js,7\c\7c02e63aed7d00dca92aac708071867b733b0bbc
+Z
+*src/config/passport/strategies/passport.js,1\c\1cfe1cbbd0132f4b8274c5c9b919a3852670315d
