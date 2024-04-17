@@ -154,3 +154,11 @@ J
 src/routes/index-router.js,4\b\4b66f0de2f3db00c24c0fba58485f11706aafc78
 L
 src/routes/session-router.js,4\f\4f064531689ad75f2d9e2415dc89d876e3473929
+C
+src/utils/bcrypt.js,7\c\7c02e63aed7d00dca92aac708071867b733b0bbc
+O
+src/config/passport/passport.js,c\7\c70c4836b196d8783c852783520b4a050171a423
+]
+-src/config/passport/strategies/jwtStrategy.js,0\b\0bd8cc754ebabcc753ac62aedaebf676b3043fb2
+@
+src/utils/jwt.js,6\a\6a358819430951c355ad2d91d11a746e4a9ff2df

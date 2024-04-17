@@ -3,6 +3,7 @@ import productRouter from './routes/products-router.js';
 import cartRouter from './routes/cart-router.js';
 import chatRouter from './routes/chat-router.js';
 import userRouter from './routes/user-router.js';
+import sessionRouter from './routes/session-router.js';
 import { engine } from 'express-handlebars'
 import { Server } from 'socket.io';
 import { __dirname } from './path.js'
@@ -13,6 +14,8 @@ import orderModel from 'mongoose-paginate-v2';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
+import initializePassport from './config/passport/passport.js';
+import passport from 'passport';
 
 
 const app = express();
@@ -69,6 +72,11 @@ app.use(cookieParser("clave secreta"));
 app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
 app.set('views', __dirname + '/views');
+
+
+initializePassport()
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 app.use('/static', express.static(__dirname + '/public'))
