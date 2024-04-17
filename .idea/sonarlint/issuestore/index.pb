@@ -156,5 +156,9 @@ L
 src/routes/session-router.js,4\f\4f064531689ad75f2d9e2415dc89d876e3473929
 C
 src/utils/bcrypt.js,7\c\7c02e63aed7d00dca92aac708071867b733b0bbc
-Z
-*src/config/passport/strategies/passport.js,1\c\1cfe1cbbd0132f4b8274c5c9b919a3852670315d
+O
+src/config/passport/passport.js,c\7\c70c4836b196d8783c852783520b4a050171a423
+]
+-src/config/passport/strategies/jwtStrategy.js,0\b\0bd8cc754ebabcc753ac62aedaebf676b3043fb2
+@
+src/utils/jwt.js,6\a\6a358819430951c355ad2d91d11a746e4a9ff2df
