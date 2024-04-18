@@ -1,6 +1,12 @@
-import {Router} from 'express';
-import  productModel  from '../models/product.js';
+import { Router } from 'express';
 
+import {
+    createProduct,
+    deleteProduct,
+    getProduct,
+    getProducts,
+    updateProduct
+} from '../controllers/productController.js';
 
 const productsRouter = Router();
 
@@ -8,20 +14,7 @@ productsRouter.get('/', async (req, res) => {
 
     try {
         const {limit, page, filter, sort} = req.query;
-        let metFilter;
-        const pag = page !== undefined ? page : 1;
-        const lim = limit !== undefined ? limit : 10;
-        const order = sort !== undefined ? sort : 'asc';
-
-        if(filter === 'true' || filter === 'false'){
-            metFilter = 'status'
-        } else if( filteer !== undefined){
-            metFilter = 'category'
-        }
-
-        const query = metFilter ? { [metFilter]: filter } : {};
-        const ordquery = order !== undefined ? `sort: { price : ${order}}`:""
-        const products = await productModel.paginate(query, {limit:lim, page:pag, sort: ordquery});
+        const prods = await getProducts(filter, limit, page, sort);
 
         res.status(200).send(products.docs);
         // const prodsLimit = products.slice(0, limite);
@@ -35,13 +28,12 @@ productsRouter.get('/', async (req, res) => {
     }
 
 
-
 });
 
-productsRouter.get('/:id', async(req, res) => {
+productsRouter.get('/:id', async (req, res) => {
     try {
         const id = req.params.id;
-        const product = await productModel.findById(id);
+        const product = await getProduct(id)
         if (product) {
             res.status(200).send(product);
         } else {
@@ -55,38 +47,32 @@ productsRouter.get('/:id', async(req, res) => {
 })
 
 productsRouter.post('/', async (req, res) => {
-
     try {
         const product = req.body;
-        // const result = productManager.addProduct(product);
-         const result =   await productModel.create(product);
-       res.send(product);
-    }
-    catch (error) {
-
-        res.status(500).send(`Error: ${error}`);
-    }
-
-});
-
-productsRouter.put('/:id', async(req, res) => {
-    try {
-        const id = req.params.id;
-        const product = req.body;
-        const result = await productModel.findByIdAndUpdate(id, product);
+        const result = createProduct(product);
         res.send(result);
     } catch (error) {
         res.status(500).send(`Error: ${error}`);
     }
 });
 
-productsRouter.delete('/:id', async(req, res) => {
+productsRouter.put('/:id', async (req, res) => {
     try {
         const id = req.params.id;
-        const result = await productModel.findByIdAndDelete(id);
+        const product = req.body;
+        const result = updateProduct(id, product)
         res.send(result);
+    } catch (error) {
+        res.status(500).send(`Error: ${error}`);
     }
-    catch (error) {
+});
+
+productsRouter.delete('/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const result = deleteProduct(id)
+        res.send(result);
+    } catch (error) {
         res.status(500).send(`Error: ${error}`);
     }
 

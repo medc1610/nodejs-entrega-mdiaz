@@ -39,7 +39,7 @@ sessionRouter.post('/register', passport.authenticate('register') ,async (req, r
     }
 });
 
-sessionRouter.get('/github', passport.authenticate('github', {scope: ['user:email']}), async (req, res => {}));
+// sessionRouter.get('/github', passport.authenticate('github', {scope: ['user:email']}), async (req, res => {}));
 
 sessionRouter.get('/githubSession', passport.authenticate('github'), async (req, res) => {
 

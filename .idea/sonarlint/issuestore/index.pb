@@ -162,3 +162,13 @@ O
 -src/config/passport/strategies/jwtStrategy.js,0\b\0bd8cc754ebabcc753ac62aedaebf676b3043fb2
 @
 src/utils/jwt.js,6\a\6a358819430951c355ad2d91d11a746e4a9ff2df
+Q
+!src/controllers/cartController.js,0\7\078524cacb6af17e86f16b86a964888c33f533b7
+Q
+!src/controllers/chatController.js,9\5\95a9eb1ea997ffd6a3e91defaa6f2d3153edafc9
+T
+$src/controllers/productController.js,7\d\7d69333562096ecc5e2877e8e9ea1515105a985f
+T
+$src/controllers/sessionController.js,8\d\8d3deb2487c114fba772b4ff20b406e6874093ec
+Q
+!src/controllers/userController.js,2\0\2003bbfae64faf403a237c673fef70ada0c1d99b

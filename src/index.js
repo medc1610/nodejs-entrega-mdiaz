@@ -10,7 +10,6 @@ import { __dirname } from './path.js'
 import upload from './config/multer.js';
 import mongoose from 'mongoose';
 import { messageModel } from './models/messages.js';
-import orderModel from 'mongoose-paginate-v2';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
