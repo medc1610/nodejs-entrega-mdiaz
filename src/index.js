@@ -4,6 +4,7 @@ import cartRouter from './routes/cart-router.js';
 import chatRouter from './routes/chat-router.js';
 import userRouter from './routes/user-router.js';
 import sessionRouter from './routes/session-router.js';
+import varenv from './dotenv.js';
 import { engine } from 'express-handlebars'
 import { Server } from 'socket.io';
 import { __dirname } from './path.js'
@@ -27,7 +28,7 @@ const server = app.listen(PORT, () => {
 const io = new Server(server);
 
 
-mongoose.connect("mongodb+srv://medc1610:medc123456@cluster0.v6ayc2x.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+mongoose.connect(varenv.MONGO_BD_URL)
     .then(() => console.log('Conectado MongoDB'))
     .catch(error => console.log(error))
 
@@ -58,16 +59,16 @@ app.use(express.json());
 
 
 app.use(session({
-    secret: 'codeSecret',
+    secret: varenv.SESSION_SECRET,
     resave: true,
     store: MongoStore.create({
-        mongoUrl:  'mongodb+srv://medc1610:medc123456@cluster0.v6ayc2x.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0',
+        mongoUrl:  varenv.MONGO_BD_URL,
         ttl: 600
 
     }),
     saveUninitialized: true
 }))
-app.use(cookieParser("clave secreta"));
+app.use(cookieParser(varenv.COOKIE_SECRET));
 app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
 app.set('views', __dirname + '/views');
