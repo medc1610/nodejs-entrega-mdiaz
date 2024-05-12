@@ -16,7 +16,16 @@ import session from 'express-session';
 import MongoStore from 'connect-mongo';
 import initializePassport from './config/passport/passport.js';
 import passport from 'passport';
+// import nodemailer from 'nodemailer';
 
+// const transporter = nodemailer.createTransport({
+//     service: 'gmail',
+//     port: 587,
+//     auth: {
+//         user:"medc1610@gmail.com",
+//         pass:
+//     }
+// })
 
 const app = express();
 const PORT = 8080;
@@ -28,7 +37,7 @@ const server = app.listen(PORT, () => {
 const io = new Server(server);
 
 
-mongoose.connect(varenv.MONGO_BD_URL)
+mongoose.connect(varenv.MONGO_DB_URL)
     .then(() => console.log('Conectado MongoDB'))
     .catch(error => console.log(error))
 
@@ -62,9 +71,8 @@ app.use(session({
     secret: varenv.SESSION_SECRET,
     resave: true,
     store: MongoStore.create({
-        mongoUrl:  varenv.MONGO_BD_URL,
+        mongoUrl:  varenv.MONGO_DB_URL,
         ttl: 600
-
     }),
     saveUninitialized: true
 }))
@@ -85,7 +93,7 @@ app.use('/api/cart/', cartRouter);
 app.use('/api/chat', chatRouter, express.static(__dirname + '/public'));
 app.use('/api/user', userRouter);
 app.use('/api/session', sessionRouter);
-app.use(session())
+// app.use(session())
 
 //cookies
 app.get('/setCookie', (req, res) => {

@@ -172,11 +172,11 @@ T
 $src/controllers/sessionController.js,8\d\8d3deb2487c114fba772b4ff20b406e6874093ec
 Q
 !src/controllers/userController.js,2\0\2003bbfae64faf403a237c673fef70ada0c1d99b
-8
-src/.env,f\8\f8550963f8b93cc32435b4600b84f3d3def8daa7
-D
-src/config/dotenv.js,c\7\c70ee5cc2d5209ffeea05b12388caf8f7c6c1724
 =
 src/dotenv.js,6\3\6376cbcea2d5caaa7b18e10cdfb5308af889c023
 4
 .env,3\c\3c84dcdc6bbe3d7817c49dcdc327b926fea1808a
+D
+src/models/ticket.js,d\3\d3804bb03c05103f1630e85dcdcb09ae5a6e0747
+S
+#src/controllers/multerController.js,7\1\713917abbbb6def9f673c52886797e09b9cc3778

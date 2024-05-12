@@ -18,15 +18,15 @@ export const getProducts = async (limit, page, filter, sort) => {
 }
 
 export const getProduct = async (id) => {
-    return await productModel.findById(id)
+    return productModel.findById(id);
 }
 
 export const createProduct = async (product) => {
-   return await productModel.create(product);
+   return productModel.create(product);
 }
 
 export const updateProduct = async (id, product) => {
-    return await productModel.findByIdAndUpdate(id, product);
+    return productModel.findByIdAndUpdate(id, product);
 }
 
 export const deleteProduct = async (id) => {
