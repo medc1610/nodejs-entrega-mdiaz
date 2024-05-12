@@ -8,7 +8,7 @@ import varenv from './dotenv.js';
 import { engine } from 'express-handlebars'
 import { Server } from 'socket.io';
 import { __dirname } from './path.js'
-import upload from './config/multer.js';
+import multerRouter from './routes/multer-router.js';
 import mongoose from 'mongoose';
 import { messageModel } from './models/messages.js';
 import cookieParser from 'cookie-parser';
@@ -93,6 +93,7 @@ app.use('/api/cart/', cartRouter);
 app.use('/api/chat', chatRouter, express.static(__dirname + '/public'));
 app.use('/api/user', userRouter);
 app.use('/api/session', sessionRouter);
+app.use('/upload', multerRouter)
 // app.use(session())
 
 //cookies
@@ -119,14 +120,7 @@ app.get('/setSession', (req, res) => {
     }
 });
 
-app.post('/upload', upload.single('product'), (req, res) => {
-    try {
-        console.log(req.file)
-        res.status(200).send("Imagen cargada correctamente")
-    } catch (e) {
-        res.status(500).send("Error al cargar imagen")
-    }
-})
+
 
 // app.get('/static', (req, res) => {
 //     const prods = [

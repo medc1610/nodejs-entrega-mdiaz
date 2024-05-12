@@ -180,3 +180,5 @@ D
 src/models/ticket.js,d\3\d3804bb03c05103f1630e85dcdcb09ae5a6e0747
 S
 #src/controllers/multerController.js,7\1\713917abbbb6def9f673c52886797e09b9cc3778
+K
+src/routes/multer-router.js,c\c\cc98d2fb36122c7955440b628313a9194eac5540

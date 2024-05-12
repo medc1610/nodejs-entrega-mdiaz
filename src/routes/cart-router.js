@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { cartModel } from '../models/cart.js';
-import {getCart, insertProductCart, createCart } from '../controllers/cartController.js';
+import { getCart, insertProductCart, createCart, createTicket } from '../controllers/cartController.js';
+import passport from 'passport';
 
 const cartRouter = Router();
 
@@ -8,6 +9,10 @@ const cartRouter = Router();
 cartRouter.post('/', getCart)
 
 cartRouter.post('/:cid/:pid', createCart)
+
+cartRouter.post('/:id',passport.authenticate('jwt', {session: false}), insertProductCart)
+
+cartRouter.post('/:cid/purchase', createTicket);
 
 cartRouter.get('/', async (req, res) => {
     try {
@@ -17,8 +22,6 @@ cartRouter.get('/', async (req, res) => {
         res.status(500).send(`Error: ${error}`);
     }
 })
-
-cartRouter.get('/:id', insertProductCart)
 
 cartRouter.put('/:cid', async (req, res) => {
     try {
@@ -95,8 +98,5 @@ cartRouter.delete('/:cid', async (req, res) => {
         res.status(500).send(`Error: ${error}`);
     }
 });
-
-
-
 
 export default cartRouter

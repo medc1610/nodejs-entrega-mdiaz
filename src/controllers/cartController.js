@@ -1,12 +1,12 @@
 import { cartModel } from '../models/cart.js';
+import productModel from '../models/product.js';
 
 export const getCart = async (req, res) => {
     try {
         const cartId = req.params.id;
         const cart = await cartModel.findById(cartId);
         res.send(cart);
-    }
-    catch (error) {
+    } catch (error) {
         res.status(500).send(`Error: ${error}`);
     }
 }
@@ -22,24 +22,62 @@ export const createCart = async (req, res) => {
 }
 
 export const insertProductCart = async (req, res) => {
-    try{
-        const cid = req.params.cid
-        const pid = req.params.pid
-        const {quantity} = req.body;
-        const cart = await cartModel.findById(cid);
+    try {
+        if(req.user.role === 'Admin'){
+            const cid = req.params.cid
+            const pid = req.params.pid
+            const {quantity} = req.body;
+            const cart = await cartModel.findById(cid);
 
-        const indice = cart.products.findIndex(prod => prod.idProduct === pid);
+            const indice = cart.products.findIndex(prod => prod.idProduct === pid);
 
-        if (indice !== -1) {
-            cart.products[indice].quantity += quantity;
+            if (indice !== -1) {
+                cart.products[indice].quantity += quantity;
+            } else {
+                cart.products.push({idProduct: pid, quantity: quantity});
+            }
+            const mensaje = await cartModel.findByIdAndUpdate(cid, cart);
+            res.status(200).send(mensaje);
         } else {
-            cart.products.push({idProduct: pid, quantity: quantity});
+            res.status(403).send('Usuario no autorizado');
         }
-        const mensaje = await cartModel.findByIdAndUpdate(cid, cart);
-        res.send(mensaje);
-    }
-    catch (error) {
+
+    } catch (error) {
         res.status(500).send(`Error: ${error}`);
     }
 }
 
+export const createTicket = async (req, res) => {
+    try {
+        const cartId = req.params.cid;
+        const cart = await cartModel.findById(cartId)
+        let prodSinStock = [];
+        if (cart) {
+            cart.products.forEach(prod => {
+                let producto = productModel.findById(prod.idProduct);
+                if (producto.stock - prod.quantity < 0) {
+                    prodSinStock.push(producto);
+                }
+            });
+            if (prodSinStock.length === 0) {
+                cart.products.forEach(prod => {
+                    let producto = productModel.findById(prod.idProduct);
+                    producto.stock -= prod.quantity;
+                    productModel.findByIdAndUpdate(prod.idProduct, producto);
+                });
+                res.status(200).send('Compra realizada');
+            } else {
+                let cart = cartModel.findById(cartId);
+                cart.products = cart.products.filter(prod => !prodSinStock.includes(prod.idProduct));
+                cartModel.findByIdAndUpdate(cartId, cart);
+                res.status(400).send('No hay stock suficiente de los siguientes productos: ' + prodSinStock);
+            }
+
+        } else {
+            res.status(404).send('Carrito no existe');
+        }
+
+    } catch (e) {
+        res.status(500).send(e);
+    }
+}
