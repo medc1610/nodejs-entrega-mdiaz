@@ -1,5 +1,5 @@
 import productModel from '../models/product.js';
-
+import { faker } from "@faker-js/faker";
 export const getProducts = async (req, res) => {
 
     try {
@@ -90,3 +90,23 @@ export const deleteProduct = async (req, res) => {
         res.status(500).send(`Error: ${error}`);
     }
 }
+export const addMockProducts = (req, res) =>{
+    const listProducts = [];
+
+    for (let index = 0; index < 100; index++) {
+        const product = {
+            title: faker.commerce.product(),
+            description: faker.commerce.productDescription(),
+            code:faker.string.alpha(6),
+            price: faker.commerce.price(),
+            status: true,
+            stock: faker.number.int(1000) ,
+            category: faker.commerce.productAdjective(),
+            thumbnails: faker.image.url() ,
+        }
+        listProducts.push(product);
+
+    }
+    res.status(200).send(listProducts)
+}
+

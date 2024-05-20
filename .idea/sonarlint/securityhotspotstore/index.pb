@@ -182,3 +182,7 @@ S
 #src/controllers/multerController.js,7\1\713917abbbb6def9f673c52886797e09b9cc3778
 K
 src/routes/multer-router.js,c\c\cc98d2fb36122c7955440b628313a9194eac5540
+O
+src/routes/mockProductRouter.js,3\0\30e00478cbaa2f9cd1e7c34f5853ebf60b70ac12
+Q
+!src/routes/mock-product-router.js,5\a\5a3605af1ad6210bf14c13f686ef273454bd9d80

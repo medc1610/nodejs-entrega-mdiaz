@@ -16,6 +16,7 @@ import session from 'express-session';
 import MongoStore from 'connect-mongo';
 import initializePassport from './config/passport/passport.js';
 import passport from 'passport';
+import mockRouter from './routes/mock-product-router.js';
 // import nodemailer from 'nodemailer';
 
 // const transporter = nodemailer.createTransport({
@@ -94,6 +95,7 @@ app.use('/api/chat', chatRouter, express.static(__dirname + '/public'));
 app.use('/api/user', userRouter);
 app.use('/api/session', sessionRouter);
 app.use('/upload', multerRouter)
+app.use('/', mockRouter)
 // app.use(session())
 
 //cookies
