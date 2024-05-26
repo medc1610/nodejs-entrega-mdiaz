@@ -8,7 +8,6 @@ const sessionRouter = Router();
 
 sessionRouter.get('/login', passport.authenticate('login'), login)
 
-
 sessionRouter.post('/register', passport.authenticate('register'), register);
 
 sessionRouter.get('/github', passport.authenticate('github', {scope: ['user:email'] }), async (req, res) => {});

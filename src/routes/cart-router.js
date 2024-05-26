@@ -17,8 +17,10 @@ cartRouter.post('/:cid/purchase', createTicket);
 cartRouter.get('/', async (req, res) => {
     try {
         const carts = await cartModel.find();
+        res.logger.info(`Se obtuvieron los carritos correctamente: ${carts} - ${new Date().toLocaleDateString()}`)
         res.status(200).send(carts);
     } catch (error) {
+        req.logger.error(`Error al eliminar el producto ${error} - ${new Date().toLocaleDateString()}`)
         res.status(500).send(`Error: ${error}`);
     }
 })
@@ -38,8 +40,10 @@ cartRouter.put('/:cid', async (req, res) => {
         });
 
         await cartModel.findByIdAndUpdate(cid, cart);
+        res.logger.info(`Carrito actualizado correctamente: ${cart} - ${new Date().toLocaleDateString()}`)
         res.send({ message: 'Products updated' });
     } catch (error) {
+        res.logger.error(`Error al actualizar el carrito ${error} - ${new Date().toLocaleDateString()}`)
         res.status(500).send(`Error: ${error}`);
     }
 });
@@ -56,11 +60,14 @@ cartRouter.put('/:cid/:pid', async (req, res) => {
         if (productIndex !== -1) {
             cart.products[productIndex] = { ...cart.products[productIndex], ...productToUpdate };
             await cartModel.findByIdAndUpdate(cid, cart);
+            res.logger.info(`Producto actualizado correctamente: ${cart} - ${new Date().toLocaleDateString()}`)
             res.send({ message: 'Product updated' });
         } else {
+            res.logger.warning(`Producto no encontrado - ${new Date().toLocaleDateString()}`)
             res.status(404).send({ message: 'Product not found in cart' });
         }
     } catch (error) {
+        res.logger.error(`Error al actualizar el producto ${error} - ${new Date().toLocaleDateString()}`)
         res.status(500).send(`Error: ${error}`);
     }
 });
@@ -77,11 +84,14 @@ cartRouter.delete('/:cid/products/:pid', async (req, res) => {
         if (productIndex !== -1) {
             cart.products.splice(productIndex, 1);
             await cartModel.findByIdAndUpdate(cid, cart);
+            res.logger.info(`Producto eliminado correctamente: ${cart} - ${new Date().toLocaleDateString()}`)
             res.send({ message: 'Product removed from cart' });
         } else {
+            res.logger.warning(`Producto no encontrado - ${new Date().toLocaleDateString()}`)
             res.status(404).send({ message: 'Product not found in cart' });
         }
     } catch (error) {
+        res.logger.error(`Error al eliminar el producto ${error} - ${new Date().toLocaleDateString()}`)
         res.status(500).send(`Error: ${error}`);
     }
 });
@@ -93,8 +103,10 @@ cartRouter.delete('/:cid', async (req, res) => {
 
         cart.products = [];
         await cartModel.findByIdAndUpdate(cid, cart);
+        res.logger.info(`Todos los productos eliminados correctamente: ${cart} - ${new Date().toLocaleDateString()}`)
         res.send({ message: 'All products removed from cart' });
     } catch (error) {
+        res.logger.error(`Error al eliminar todos los productos ${error} - ${new Date().toLocaleDateString()}`)
         res.status(500).send(`Error: ${error}`);
     }
 });

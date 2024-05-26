@@ -17,6 +17,7 @@ import MongoStore from 'connect-mongo';
 import initializePassport from './config/passport/passport.js';
 import passport from 'passport';
 import mockRouter from './routes/mock-product-router.js';
+import {addLogger} from './utils/logger.js';
 // import nodemailer from 'nodemailer';
 
 // const transporter = nodemailer.createTransport({
@@ -29,11 +30,21 @@ import mockRouter from './routes/mock-product-router.js';
 // })
 
 const app = express();
+app.use(addLogger);
 const PORT = 8080;
 const server = app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
 
+app.get('/', (req, res) => {
+    req.logger.fatal("fatal")
+    req.logger.error("error")
+    req.logger.warning("warning")
+    req.logger.info("info")
+    req.logger.http("http")
+    req.logger.debug("debug")
+
+});
 
 const io = new Server(server);
 
@@ -64,6 +75,7 @@ io.on('connection', (socket) => {
     })
 
 });
+
 
 app.use(express.json());
 
