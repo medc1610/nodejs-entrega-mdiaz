@@ -52,7 +52,7 @@ export const getProduct = async (req, res) => {
 
 export const createProduct = async (req, res) => {
     try {
-        if (req.user.role === 'Admin') {
+        if (req.user.role === 'Premium' || req.user.role === 'Admin') {
             const product = req.body;
             const result = productModel.create(product);
             req.logger.info(`Producto creado correctamente: ${result} - ${new Date().toLocaleDateString()}`)
@@ -70,7 +70,7 @@ export const createProduct = async (req, res) => {
 
 export const updateProduct = async (req, res) => {
     try {
-        if (req.user.role === 'Admin') {
+        if (req.user.role === 'Premium' || req.user.role === 'Admin') {
             const id = req.params.id;
             const product = req.body;
             const result = productModel.findByIdAndUpdate(id, product);
@@ -89,7 +89,7 @@ export const updateProduct = async (req, res) => {
 
 export const deleteProduct = async (req, res) => {
     try {
-        if (req.user.role === 'Admin') {
+        if (req.user.role === 'Premium' || req.user.role === 'Admin') {
             const id = req.params.id;
             const result = productModel.findByIdAndDelete(id);
             req.logger.info(`Producto eliminado correctamente: ${result} - ${new Date().toLocaleDateString()}`)
