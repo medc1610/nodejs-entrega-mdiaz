@@ -40,9 +40,9 @@ app.get('/', (req, res) => {
     req.logger.fatal("fatal")
     req.logger.error("error")
     req.logger.warning("warning")
-    req.logger.info("info")
     req.logger.http("http")
     req.logger.debug("debug")
+    req.logger.info("info")
 
 });
 

@@ -1,5 +1,13 @@
 import { Router } from 'express';
-import {login, register, sessionGithub, testJWT, logout} from '../controllers/sessionController.js';
+import {
+    login,
+    register,
+    sessionGithub,
+    testJWT,
+    logout,
+    changePassword,
+    sendEmailPassword
+} from '../controllers/sessionController.js';
 import passport from 'passport';
 
 
@@ -18,9 +26,8 @@ sessionRouter.get('/logout', logout)
 
 sessionRouter.get('/testJWT', passport.authenticate('jwt', {session: false}), testJWT)
 
-// sessionRouter.get('/current', passport.authenticate('jwt',), (req, res) => {
-//     console.log(req)
-//     res.status(200).send('Usuario logueado');
-// })
+sessionRouter.get('/sendEmailPassword', sendEmailPassword )
+
+sessionRouter.post('/reset-password/:token', changePassword)
 
 export default sessionRouter;

@@ -1,4 +1,7 @@
-import passport from 'passport';
+import { sendEmailChangePassword } from '../utils/nodemailer.js';
+import jwt from 'jsonwebtoken';
+import { userModel } from '../models/user.js';
+import { createHash, validatePassword } from '../utils/bcrypt.js';
 
 export const login = async (req, res) => {
     try {
@@ -59,4 +62,47 @@ export const testJWT = async (req, res) => {
         res.status(200).send(req.user);
     }
 
+}
+
+export const changePassword = async (req, res) => {
+    const {token} = req.params;
+    const { newPassword } = req.body;
+
+    try {
+        const validateToken = jwt.verify(token.substring(0,6), "coder");
+        const user = userModel.findOne({email: validateToken.userEmail});
+        if(user){
+           if(!validatePassword(newPassword, user.password)){
+               user.password = await createHash(newPassword);
+              const resultado = await userModel.findOneAndUpdate(user._id, user);
+                res.status(200).send(resultado);
+           } else {
+                res.status(400).send('Contraseña igual a la anterior');
+            }
+        } else {
+            res.status(404).send('Usuario no encontrado');
+        }
+
+    }catch (error) {
+        res.status(500).send(`Error: ${error}`);
+
+    }
+}
+
+export const sendEmailPassword = async (req, res) => {
+    try {
+        const {email} = req.body;
+        const user = await userModel.find({email: email});
+
+        if (user) {
+            const token = jwt.sign({userEmail:email}, "coder", {expiresIn: '1h'})
+            const resetLink = `http://localhost:8080/api/session/resetpasswprd?token=${token}`
+            await sendEmailChangePassword(email, resetLink)
+            res.status(200).send('Email enviado');
+        } else {
+            res.status(404).send('Usuario no encontrado');
+        }
+    } catch (error) {
+        res.status(500).send(`Error: ${error}`);
+    }
 }

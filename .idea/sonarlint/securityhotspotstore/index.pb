@@ -186,3 +186,5 @@ Q
 !src/routes/mock-product-router.js,5\a\5a3605af1ad6210bf14c13f686ef273454bd9d80
 C
 src/utils/logger.js,7\1\713f1ceae968d26671b3f1919e880e627dde6142
+G
+src/utils/nodemailer.js,7\b\7b2aa8a991014bd0f020433f0ca84a11dec800cb

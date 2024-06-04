@@ -17,7 +17,7 @@ const customLevelOtp = {
         warning: 'yellow',
         info: 'cyan',
         http: 'white',
-        debug: 'gray'
+        debug: 'black'
     }
 }
 
