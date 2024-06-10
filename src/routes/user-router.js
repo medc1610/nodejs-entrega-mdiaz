@@ -5,6 +5,6 @@ const userRouter = Router();
 
 userRouter.get('/', getUsers);
 
-userRouter.post('/updateUser', updateUserPremiumRoleById)
+userRouter.put('/updateUser/:id', updateUserPremiumRoleById)
 
 export default userRouter;

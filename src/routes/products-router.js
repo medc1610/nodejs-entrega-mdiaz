@@ -6,7 +6,6 @@ import {
     getProducts,
     updateProduct
 } from '../controllers/productController.js';
-import passport from 'passport';
 
 const productsRouter = Router();
 
@@ -14,10 +13,10 @@ productsRouter.get('/', getProducts);
 
 productsRouter.get('/:id', getProduct)
 
-productsRouter.post('/', passport.authenticate('jwt', {session: false}), createProduct);
+productsRouter.post('/post', createProduct);
 
-productsRouter.put('/:id', updateProduct);
+productsRouter.put('/put/:id', updateProduct);
 
-productsRouter.delete('/:id', deleteProduct)
+productsRouter.delete('/delete/:id', deleteProduct)
 
 export default productsRouter;

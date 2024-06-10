@@ -10,28 +10,23 @@ const LocalStrategy = local.Strategy;
 
 const initializePassport = () => {
 
-    passport.use('register', new LocalStrategy({
-        passReqToCallBack: true,
-        usernameField: 'email'
-    }, async (req, email, password, done) => {
-
+    passport.use('register', new LocalStrategy({ passReqToCallback: true, usernameField: 'email' }, async (req, username, password, done) => {
         try {
-            const {nombre, apellido, password, edad, email} = req.body;
-            const findUser = await userModel.findOne({email: email});
+            const { firstName, lastName, email, password, edad, role } = req.body
+            const findUser = await userModel.findOne({ email: email })
             if (findUser) {
                 return done(null, false)
             } else {
-                const user = await userModel.create({nombre, apellido, edad, email, password: createHash(password)});
-                return done(null, user);
+                const user = await userModel.create({ firstName: firstName, lastName: lastName, email: email, edad: edad, role:role? role: 'user', password: createHash(password) })
+                return done(null, user)
             }
-        } catch (error) {
-            return done(error);
+        } catch (e) {
+            return done(e)
         }
-
     }))
 
     passport.serializeUser((user, done) => {
-        done(null, user.id);
+        done(null, user._id);
     });
 
     passport.deserializeUser(async (id, done) => {
@@ -39,28 +34,17 @@ const initializePassport = () => {
         done(null, user);
     })
 
-    passport.use('login', new LocalStrategy({usernameField: 'email'}, async (email, password, done) => {
-
-
+    passport.use('login', new LocalStrategy({ usernameField: 'email' }, async (username, password, done) => {
         try {
-            const user = await userModel.findOne({email: email});
-
+            const user = await userModel.findOne({ email: username }).lean()
             if (user && validatePassword(password, user.password)) {
-                req.session.email = email;
-                if (user.role === 'admin') {
-                    req.sesion.admin = true
-                    return done(null, user)
-                } else {
-                    return done(null, user)
-                }
-
+                return done(null, user)
             } else {
                 return done(null, false)
             }
         } catch (e) {
-            return done(e);
+            return done(e)
         }
-
     }))
 
     // passport.use('github', new GithubStrategy({
@@ -90,7 +74,7 @@ const initializePassport = () => {
     //     }
     // ))
 
-    passport.use(strategyJWT);
+    passport.use('jwt', strategyJWT)
 }
 
 export default initializePassport;

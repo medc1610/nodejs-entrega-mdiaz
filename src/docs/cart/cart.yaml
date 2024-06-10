@@ -1,0 +1,269 @@
+paths:
+  /api/cart:
+    get:
+      summary: Get all Carts
+      tags:
+        - Carts
+      responses:
+        "200":
+          description: Los carritos fueron obtenidos exitosamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/cart'
+        "400":
+          description: Carritos no encontrados
+        "500":
+          description: Error interno del servidor
+
+  /api/cart/{cid}:
+    get:
+      summary: Get Cart by id
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: Identificador único del carrito
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Carrito obtenido exitosamente
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/cart'
+        "400":
+          description: Carritos no encontrados
+        "500":
+          description: Error interno del servidor
+
+
+  /api/cart/create:
+    post:
+      summary: Crear Carrito
+      tags:
+        - Carts
+      responses:
+        "200":
+          description: Carrito creado exitosamente
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/cart'
+        "400":
+          description: Carritos no encontrados
+        "500":
+          description: Error interno del servidor
+
+
+  /add-product/{cid}/{pid}:
+    post:
+      summary: Get Cart by id
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: Identificador único del carrito
+          schema:
+            type: string
+        - name: pid
+          in: path
+          required: true
+          description: Identificador único del producto
+          schema:
+              type: string
+      responses:
+        "200":
+          description: Producto agregado exitosamente
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/cart'
+        "400":
+          description: Carrito no encontrados
+        "500":
+          description: Error interno del servidor
+
+
+
+  /ticket/{cid}/purchase:
+    post:
+      summary: Create ticket
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: Identificador único del carrito
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Ticket creado exitosamente
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/ticket'
+        "400":
+          description: Carrito no encontrados
+        "500":
+          description: Error interno del servidor
+
+  /{cid}/{pid}:
+    put:
+      summary: update product
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: Identificador único del carrito
+          schema:
+            type: string
+        - name: pid
+          in: path
+          required: true
+          description: Identificador único del producto
+          schema:
+              type: string
+      requestBody:
+        required: true
+        content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/product'
+      responses:
+        "200":
+          description: Producto editado exitosamente
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/cart'
+        "400":
+          description: Carrito no encontrados
+        "500":
+          description: Error interno del servidor
+
+  /delete/{cid}/products/{pid}:
+    delete:
+      summary: Delete product by id
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: Identificador único del carrito
+          schema:
+            type: string
+        - name: pid
+          in: path
+          required: true
+          description: Identificador único del producto
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Producto eliminado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/cart'
+        "400":
+          description: Producto no encontrado
+        "500":
+          description: Error interno del servidor
+
+  /delete/{cid}/:
+    delete:
+      summary: Delete cart by id
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: Identificador único del carrito
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Carrito eliminado exitosamente
+        "400":
+          description: Producto no encontrado
+        "500":
+          description: Error interno del servidor
+
+components:
+  schemas:
+    cart:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: Identificador único del carrito
+        products:
+          type: Array
+          description: Productos del carrito
+      example:
+        _id: 1
+        products: []
+
+    ticket:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: Identificador único del ticket
+        code:
+          type: String
+          description: Código del ticket
+        purchase_datetime:
+          type: Date
+          description: Fecha de compra
+        amount:
+          type: Number
+          description: Monto de la compra
+        purchaser:
+          type: String
+          description: Comprador
+        products:
+          type: Array
+          description: Productos del ticket
+      example:
+        _id: 1
+        code: 123456
+        purchase_datetime: 2021-10-10
+        amount: 100
+        purchaser: Comprador
+        products: []
+
+
+  requestBodies:
+    product:
+      type: object
+      properties:
+        quantity:
+          type: String
+          description: Cantidad del producto
+      example:
+        quantity: 1

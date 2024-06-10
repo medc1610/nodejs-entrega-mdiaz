@@ -1,0 +1,193 @@
+  paths:
+    /api/products:
+      get:
+        summary: Get all products
+        tags:
+          - Products
+        responses:
+          "200":
+            description: Los productos fueron obtenidos exitosamente
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Product'
+          "400":
+            description: Productos no encontrados
+          "500":
+            description: Error interno del servidor
+
+    /api/products/{id}:
+      get:
+        summary: Get product by id
+        tags:
+          - Products
+        parameters:
+            - name: id
+              in: path
+              required: true
+              description: Identificador único del producto
+              schema:
+                type: string
+        responses:
+          "200":
+            description: Producto obtenido exitosamente
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Product'
+          "400":
+            description: Producto no encontrado
+          "500":
+            description: Error interno del servidor
+
+    /api/products/post:
+      post:
+        summary: Crear Producto
+        tags:
+          - Products
+        requestBody:
+            required: true
+            content:
+                application/json:
+                  schema:
+                    $ref: '#/components/requestBodies/Product'
+        responses:
+          "200":
+            description: Producto creado exitosamente
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Product'
+          "400":
+            description: Producto no encontrado
+          "500":
+            description: Error interno del servidor
+
+    /api/products/put/{id}:
+      put:
+        summary: Update product by id
+        tags:
+          - Products
+        parameters:
+          - name: id
+            in: path
+            required: true
+            description: Identificador único del producto
+            schema:
+              type: string
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/Product'
+        responses:
+          "200":
+            description: Producto editado exitosamente
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Product'
+          "400":
+            description: Producto no encontrado
+          "500":
+            description: Error interno del servidor
+
+    /api/products/delete/{id}:
+      delete:
+        summary: Delete product by id
+        tags:
+          - Products
+        parameters:
+          - name: id
+            in: path
+            required: true
+            description: Identificador único del producto
+            schema:
+              type: string
+        responses:
+          "200":
+            description: Producto editado exitosamente
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Product'
+          "400":
+            description: Producto no encontrado
+          "500":
+            description: Error interno del servidor
+
+  components:
+    schemas:
+      Product:
+        type: object
+        properties:
+          _id:
+            type: ObjectId
+            description: Identificador único del producto
+          title:
+            type: String
+            description: Título del producto
+          description:
+            type: String
+            description: Descripción del producto
+          stock:
+            type: String
+            description: Stock del producto
+          category:
+            type: String
+            description: Categoría del producto
+          status:
+            type: Boolean
+            description: Estado del producto
+          price:
+            type: String
+            description: Precio del producto
+          code:
+            type: String
+            description: Código del producto
+        example:
+          _id: 1
+          title: Titulo
+          description: Descripción del producto
+          stock: 10
+          category: Categoría
+          status: true
+          price: 100
+          code: 123456
+
+    requestBodies:
+      Product:
+        type: object
+        properties:
+          title:
+            type: String
+            description: Título del producto
+          description:
+            type: String
+            description: Descripción del producto
+          stock:
+            type: String
+            description: Stock del producto
+          category:
+            type: String
+            description: Categoría del producto
+          status:
+            type: Boolean
+            description: Estado del producto
+          price:
+            type: String
+            description: Precio del producto
+          code:
+            type: String
+            description: Código del producto
+        example:
+            title: Titulo
+            description: Descripción del producto
+            stock: 10
+            category: Categoría
+            status: true
+            price: 100
+            code: 123456

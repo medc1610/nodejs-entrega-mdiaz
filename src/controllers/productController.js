@@ -6,7 +6,7 @@ export const getProducts = async (req, res) => {
         const {limit, page, filter, sort} = req.query;
         let metFilter;
         const pag = page !== undefined ? page : 1;
-        const limi = limit !== undefined ? limit : 10;
+        const limi = limit !== undefined ? limit : 100;
         const order = sort !== undefined ? sort : 'asc';
 
         if (filter === 'true' || filter === 'false') {
@@ -16,16 +16,10 @@ export const getProducts = async (req, res) => {
         }
         const query = metFilter ? {[metFilter]: filter} : {};
         const ordQuery = order !== undefined ? `sort: { price : ${order}}` : ""
-        let prods = productModel.paginate(query, {limit: limi, page: pag, sort: ordQuery})
+        let prods = await productModel.paginate(query, {limit: limi, page: pag, sort: ordQuery})
 
         req.logger.info(`Se obtuvieron los productos correctamente: ${prods.docs} - ${new Date().toLocaleDateString()}`)
         res.status(200).send(prods.docs);
-        // const prodsLimit = products.slice(0, limite);
-        // res.render('templates/products', {
-        //     mostrarProductos: true,
-        //     prods: prodsLimit,
-        //     css: 'home.css',
-        // })
     } catch (error) {
         req.logger.error(`Error al obtener los productos ${error} - ${new Date().toLocaleDateString()}`)
         res.status(500).send(`Error: ${error}`);

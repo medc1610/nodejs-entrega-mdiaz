@@ -6,47 +6,24 @@ import passport from 'passport';
 const cartRouter = Router();
 
 
-cartRouter.post('/', getCart)
-
-cartRouter.post('/:cid/:pid', createCart)
-
-cartRouter.post('/:id',passport.authenticate('jwt', {session: false}), insertProductCart)
-
-cartRouter.post('/:cid/purchase', createTicket);
-
 cartRouter.get('/', async (req, res) => {
     try {
         const carts = await cartModel.find();
-        res.logger.info(`Se obtuvieron los carritos correctamente: ${carts} - ${new Date().toLocaleDateString()}`)
+        req.logger.info(`Se obtuvieron los carritos correctamente: ${carts} - ${new Date().toLocaleDateString()}`)
         res.status(200).send(carts);
     } catch (error) {
-        req.logger.error(`Error al eliminar el producto ${error} - ${new Date().toLocaleDateString()}`)
+        req.logger.error(`Error al encontrar los carritos${error} - ${new Date().toLocaleDateString()}`)
         res.status(500).send(`Error: ${error}`);
     }
 })
 
-cartRouter.put('/:cid', async (req, res) => {
-    try {
-        const cid = req.params.cid;
-        const productsToUpdate = req.body.products;
-        const cart = await cartModel.findById(cid);
+cartRouter.get('/:cid', getCart)
 
-        productsToUpdate.forEach(productToUpdate => {
-            const productIndex = cart.products.findIndex(prod => prod.idProduct === productToUpdate.idProduct);
+cartRouter.post('/create', createCart)
 
-            if (productIndex !== -1) {
-                cart.products[productIndex] = { ...cart.products[productIndex], ...productToUpdate };
-            }
-        });
+cartRouter.post('/add-product/:cid/:pid',passport.authenticate('jwt', {session: false}), insertProductCart)
 
-        await cartModel.findByIdAndUpdate(cid, cart);
-        res.logger.info(`Carrito actualizado correctamente: ${cart} - ${new Date().toLocaleDateString()}`)
-        res.send({ message: 'Products updated' });
-    } catch (error) {
-        res.logger.error(`Error al actualizar el carrito ${error} - ${new Date().toLocaleDateString()}`)
-        res.status(500).send(`Error: ${error}`);
-    }
-});
+cartRouter.post('/ticket/:cid/purchase', createTicket);
 
 cartRouter.put('/:cid/:pid', async (req, res) => {
     try {
@@ -60,20 +37,19 @@ cartRouter.put('/:cid/:pid', async (req, res) => {
         if (productIndex !== -1) {
             cart.products[productIndex] = { ...cart.products[productIndex], ...productToUpdate };
             await cartModel.findByIdAndUpdate(cid, cart);
-            res.logger.info(`Producto actualizado correctamente: ${cart} - ${new Date().toLocaleDateString()}`)
+            req.logger.info(`Producto actualizado correctamente: ${cart} - ${new Date().toLocaleDateString()}`)
             res.send({ message: 'Product updated' });
         } else {
-            res.logger.warning(`Producto no encontrado - ${new Date().toLocaleDateString()}`)
+            req.logger.warning(`Producto no encontrado - ${new Date().toLocaleDateString()}`)
             res.status(404).send({ message: 'Product not found in cart' });
         }
     } catch (error) {
-        res.logger.error(`Error al actualizar el producto ${error} - ${new Date().toLocaleDateString()}`)
+        req.logger.error(`Error al actualizar el producto ${error} - ${new Date().toLocaleDateString()}`)
         res.status(500).send(`Error: ${error}`);
     }
 });
 
-
-cartRouter.delete('/:cid/products/:pid', async (req, res) => {
+cartRouter.delete('/delete/:cid/products/:pid', async (req, res) => {
     try {
         const cid = req.params.cid;
         const pid = req.params.pid;
@@ -96,7 +72,7 @@ cartRouter.delete('/:cid/products/:pid', async (req, res) => {
     }
 });
 
-cartRouter.delete('/:cid', async (req, res) => {
+cartRouter.delete('/delete/:cid', async (req, res) => {
     try {
         const cid = req.params.cid;
         const cart = await cartModel.findById(cid);

@@ -5,10 +5,10 @@ export const getCart = async (req, res) => {
     try {
         const cartId = req.params.id;
         const cart = await cartModel.findById(cartId);
-        res.logger.info(`Se obtuvo el carrito correctamente: ${cart} - ${new Date().toLocaleDateString()}`)
+        req.logger.info(`Se obtuvo el carrito correctamente: ${cart} - ${new Date().toLocaleDateString()}`)
         res.status(200).send(cart);
     } catch (error) {
-        res.logger.error(`Error al obtener el carrito ${error} - ${new Date().toLocaleDateString()}`)
+        req.logger.error(`Error al obtener el carrito ${error} - ${new Date().toLocaleDateString()}`)
         res.status(500).send(`Error: ${error}`);
     }
 }
@@ -16,11 +16,11 @@ export const getCart = async (req, res) => {
 export const createCart = async (req, res) => {
     try {
         const body = req.body;
-        const cart = await cartModel.create(body);
-        res.logger.info(`Carrito creado correctamente: ${cart} - ${new Date().toLocaleDateString()}`)
+        const cart = await cartModel.create({body});
+        req.logger.info(`Carrito creado correctamente: ${cart} - ${new Date().toLocaleDateString()}`)
         res.status(200).send(cart);
     } catch (error) {
-        res.logger.error(`Error al crear el carrito ${error} - ${new Date().toLocaleDateString()}`)
+        req.logger.error(`Error al crear el carrito ${error} - ${new Date().toLocaleDateString()}`)
         res.status(500).send(`Error: ${error}`);
     }
 }
@@ -72,23 +72,23 @@ export const createTicket = async (req, res) => {
                     producto.stock -= prod.quantity;
                     productModel.findByIdAndUpdate(prod.idProduct, producto);
                 });
-                res.logger.info(`Compra realizada correctamente - ${new Date().toLocaleDateString()}`)
+                req.logger.info(`Compra realizada correctamente - ${new Date().toLocaleDateString()}`)
                 res.status(200).send('Compra realizada');
             } else {
                 let cart = cartModel.findById(cartId);
                 cart.products = cart.products.filter(prod => !prodSinStock.includes(prod.idProduct));
                 cartModel.findByIdAndUpdate(cartId, cart);
-                res.logger.warning(`No hay stock suficiente de los siguientes productos: ${prodSinStock} - ${new Date().toLocaleDateString()}`)
+                req.logger.warning(`No hay stock suficiente de los siguientes productos: ${prodSinStock} - ${new Date().toLocaleDateString()}`)
                 res.status(400).send('No hay stock suficiente de los siguientes productos: ' + prodSinStock);
             }
 
         } else {
-            res.logger.warning(`Carrito no existe - ${new Date().toLocaleDateString()}`)
+            req.logger.warning(`Carrito no existe - ${new Date().toLocaleDateString()}`)
             res.status(404).send('Carrito no existe');
         }
 
     } catch (e) {
-        res.logger.error(`Error al realizar la compra ${e} - ${new Date().toLocaleDateString()}`)
+        req.logger.error(`Error al realizar la compra ${e} - ${new Date().toLocaleDateString()}`)
         res.status(500).send(e);
     }
 }

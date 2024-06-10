@@ -188,3 +188,11 @@ C
 src/utils/logger.js,7\1\713f1ceae968d26671b3f1919e880e627dde6142
 G
 src/utils/nodemailer.js,7\b\7b2aa8a991014bd0f020433f0ca84a11dec800cb
+O
+src/docs/products/products.yaml,9\d\9d1c19c0354458db0f431243387fd8cdae64867c
+M
+src/docs/Session/session.yaml,e\1\e1afb9b1d67cfe94d167e53bc94bfe4213c77fb3
+G
+src/docs/user/user.yaml,a\8\a813fbc0ada06682f944b551a45703061cad8eb1
+G
+src/docs/cart/cart.yaml,2\d\2d9cd54875d5ea66325b32d9821dd5370073b6aa

@@ -8,30 +8,30 @@ export const login = async (req, res) => {
         if (!req.user) {
             res.status(401).send('Usuario o contraseña incorrectos')
         }
-
         req.session.user = {
             email: req.user.email,
             first_name: req.user.first_name,
         }
-        res.logger.info(`Usuario logueado correctamente: ${req.user.email} - ${new Date().toLocaleDateString()}`)
+        req.logger.info(`Usuario logueado correctamente: ${req.user.email} - ${req.user.role} ${new Date().toLocaleDateString()}`)
         res.status(200).send('Usuario logueado');
     } catch (error) {
-        res.logger.error(`Error al loguear el usuario ${error} - ${new Date().toLocaleDateString()}`)
+        req.logger.error(`Error al loguear el usuario ${error} - ${new Date().toLocaleDateString()}`)
         res.status(500).send(`Error: ${error}`);
     }
 }
 
 export const register = async (req, res) => {
+    console.log(req.user)
     try {
         if (!req.user) {
-            res.logger.warning(`Usuario ya existe - ${new Date().toLocaleDateString()}`)
+            req.logger.warning(`Usuario ya existe - ${new Date().toLocaleDateString()}`)
             res.status(400).send('Usuario ya existe')
         }
-        res.logger.info(`Usuario creado correctamente: ${req.user.email} - ${new Date().toLocaleDateString()}`)
+        req.logger.info(`Usuario creado correctamente: ${req.user.email} - ${new Date().toLocaleDateString()}`)
         res.status(200).send('Usuario creado');
 
     } catch (error) {
-        res.logger.error(`Error al crear el usuario ${error} - ${new Date().toLocaleDateString()}`)
+        req.logger.error(`Error al crear el usuario ${error} - ${new Date().toLocaleDateString()}`)
         res.status(500).send(`Error: ${error}`);
     }
 }

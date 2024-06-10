@@ -13,10 +13,10 @@ export const strategyJWT = new JwtStrategy(jwtOptions, async (payload, done) => 
     try{
         const user = await userModel.findById(payload.user._id);
         if(!user){
-            done(null, false)
+           return done(null, false)
         }
-        done(null, user)
+        return done(null, user)
     }catch (error){
-        done(error, null)
+        return done(error, null)
     }
 });

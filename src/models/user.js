@@ -37,8 +37,9 @@ const userSchema = new Schema({
 
 userSchema.pre('save', async function (next) {
     try {
-        const cart = await cartModel.create();
+        const cart = await cartModel.create({ products: [] });
         this.cart_id = cart._id;
+
         next();
     } catch (error) {
         next(error);
