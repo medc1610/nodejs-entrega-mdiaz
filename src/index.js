@@ -7,7 +7,7 @@ import sessionRouter from './routes/session-router.js';
 import varenv from './dotenv.js';
 import { engine } from 'express-handlebars'
 import { Server } from 'socket.io';
-import { __dirname } from './path.js'
+import __dirname from './path.js'
 import multerRouter from './routes/multer-router.js';
 import mongoose from 'mongoose';
 import { messageModel } from './models/messages.js';
@@ -17,7 +17,7 @@ import MongoStore from 'connect-mongo';
 import initializePassport from './config/passport/passport.js';
 import passport from 'passport';
 import mockRouter from './routes/mock-product-router.js';
-import {addLogger} from './utils/logger.js';
+import { addLogger } from './utils/logger.js';
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUIExpress from 'swagger-ui-express';
 // import nodemailer from 'nodemailer';
@@ -39,11 +39,10 @@ const server = app.listen(PORT, () => {
 });
 
 
-
 const io = new Server(server);
 
 
-mongoose.connect(varenv.MONGO_DB_URL)
+await mongoose.connect(varenv.MONGO_DB_URL)
     .then(() => console.log('Conectado MongoDB'))
     .catch(error => console.log(error))
 
@@ -69,7 +68,7 @@ const swaggerOptions = {
 }
 
 const specs = swaggerJSDoc(swaggerOptions);
-app.use ('/apidocs', swaggerUIExpress.serve, swaggerUIExpress.setup(specs));
+app.use('/apidocs', swaggerUIExpress.serve, swaggerUIExpress.setup(specs));
 
 // const resultado = await orderModel.paginate({status:true}, {page: 1, limit: 10, sort: {price:'desc'}});
 
@@ -102,7 +101,7 @@ app.use(session({
     secret: varenv.SESSION_SECRET,
     resave: true,
     store: MongoStore.create({
-        mongoUrl:  varenv.MONGO_DB_URL,
+        mongoUrl: varenv.MONGO_DB_URL,
         ttl: 600
     }),
     saveUninitialized: true

@@ -4,7 +4,7 @@ import productModel from '../models/product.js';
 export const getCart = async (req, res) => {
     try {
         const cartId = req.params.id;
-        const cart = await cartModel.findById(cartId);
+        const cart = await cartModel.findOne(cartId);
         req.logger.info(`Se obtuvo el carrito correctamente: ${cart} - ${new Date().toLocaleDateString()}`)
         res.status(200).send(cart);
     } catch (error) {

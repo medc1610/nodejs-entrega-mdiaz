@@ -7,13 +7,19 @@
   "scripts": {
     "devNodemon": "nodemon src/index.js",
     "devNode": "node --watch src/index.js",
+    "testMochaU": "mocha test/user.test.js",
+    "testMochaP": "mocha test/product.test.js",
+    "testMochaC": "mocha test/cart.test.js",
     "start": "node src/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^3.0.3"
+    "chai": "^4.4.1",
+    "mocha": "^10.4.0",
+    "nodemon": "^3.1.3",
+    "supertest": "^7.0.0"
   },
   "dependencies": {
     "@faker-js/faker": "^8.4.1",
