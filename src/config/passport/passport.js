@@ -38,6 +38,8 @@ const initializePassport = () => {
         try {
             const user = await userModel.findOne({ email: username }).lean()
             if (user && validatePassword(password, user.password)) {
+                await userModel.findByIdAndUpdate(user._id, { last_connection: new Date() })
+                await user.save()
                 return done(null, user)
             } else {
                 return done(null, false)

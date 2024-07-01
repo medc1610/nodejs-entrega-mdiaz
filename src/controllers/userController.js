@@ -24,11 +24,35 @@ export const updateUserPremiumRoleById = async (req, res) => {
                 newRole = 'user';
             }
             await userModel.updateOne(id, newRole);
-           res.status(200).send('Usuario actualizado');
+            res.status(200).send('Usuario actualizado');
         } else {
             res.status(404).send('Usuario no encontrado o no autorizado');
         }
     } catch (e) {
+        res.status(500).send(`Error: ${e}`);
+    }
+}
+
+export const sendDocument = async (req, res) => {
+    try {
+        const {uid} = req.params;
+        const newDocs = req.body
+        const user = await userModel.findByIdAndUpdate(uid, {
+            $push: {
+                document: {
+                    $each: {
+                        newDocs
+                    }
+                }
+            }
+        }, {new: true})
+        if (!user) {
+            res.status(404).send('Usuario no encontrado');
+        } else {
+            res.status(200).send(user);
+        }
+
+    } catch (error) {
         res.status(500).send(`Error: ${error}`);
     }
 }

@@ -198,14 +198,8 @@ G
 src/docs/cart/cart.yaml,2\d\2d9cd54875d5ea66325b32d9821dd5370073b6aa
 A
 test/user.test.js,7\c\7cccd74e939313738a1cb0754244d705b8bb7cc7
-L
-test/carrito/apiCart.test.js,4\f\4f249cd21f28674522d237a9260c5015eb378fe2
-O
-test/session/apiSession.test.js,c\f\cf04f2aebd0a7dc559d78252c9f6e771cb81e79d
 D
 test/product.test.js,0\7\072afa73d6e06fe27bab98667f0d6f3e411f1539
-D
-test/session.test.js,5\7\57d58d8d75d33ab844fe926f8de44ac2d1fce180
 A
 test/cart.test.js,4\d\4de82e3ba707aeec66e5bc80f5dfe1e6aa967a6a
 `

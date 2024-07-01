@@ -30,4 +30,5 @@ sessionRouter.get('/sendEmailPassword', sendEmailPassword )
 
 sessionRouter.post('/reset-password/:token', changePassword)
 
+
 export default sessionRouter;

@@ -37,6 +37,9 @@ export const register = async (req, res) => {
 }
 
 export const logout = async (req, res) => {
+    const user = await userModel.findByOne({email: req.session.user.email});
+    user.last_connection = new Date();
+    await user.save()
     req.session.destroy(function (e) {
         if (e) {
             console.log(e);
