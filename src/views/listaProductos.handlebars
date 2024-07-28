@@ -1,0 +1,64 @@
+
+<div>
+    <div>
+        Bienvenido {{first_name}} {{last_name}}
+    </div>
+    <div>
+        <form action="{{host}}/api/session/logout", method="GET">
+            <button value="submit">Logout</button>
+        </form>
+    </div>
+    <div>
+    Lista de productos 
+    <div id="contenido">
+        <table border="1">
+            <theader>
+                <tr>
+                    <th>Id</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Code</th>
+                    <th>Price</th>
+                    <th>Status</th>
+                    <th>Stock</th>
+                    <th>Category</th>
+                    <th>Thumbnails</th>
+                    <th>Opciones</th>
+                </tr>
+            </theader>
+            <tbody id="lista">
+                {{#each products.payload}}
+                    <tr>
+                        <td>{{this._id}}</td>
+                        <td>{{this.title}}</td>
+                        <td>{{this.description}}</td>
+                        <td>{{this.code}}</td>
+                        <td>{{this.price}}</td>
+                        <td>{{this.status}}</td>
+                        <td>{{this.stock}}</td>
+                        <td>{{this.category}}</td>
+                        <td>{{this.thumbnails}}</td>
+                        <td> 
+                            
+                                <button id="agregar" onclick="agregar('{{../host}}/api/carts/{{../cartId}}/product/{{this._id}}')">Agregar al carrito</button>                                                   
+                            
+                        </td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+            
+
+    </div>
+    <div>
+        {{#if products.hasPrevPage}}           
+             <a href="{{products.prevLink}}&cartId={{cartId}}">Prev</a>
+        {{/if}}
+        {{#if products.hasNextPage}}
+            <a  href="{{products.nextLink}}&cartId={{cartId}}">Next</a>
+        {{/if}}
+    </div>
+</div>
+</div>
+<a href="{{host}}/cart/{{cartId}}">ver carro</a>
+<script src="/js/cart.js"></script>

@@ -1,0 +1,358 @@
+paths:
+  /api/products/:
+    post:
+      summary: Agrega un producto
+      tags:
+        - Producto
+      requestBody:
+        content:
+          application/json:
+            example:
+                title: Néctar Guallarauco Mango
+                description: Néctar Guallarauco Mango 0% Azúcar Añadida 1 L
+                code: BIGF
+                price: 1000
+                stock: 66
+                status: true
+                category: Bebestible
+                thumbnails: []
+      responses:
+        200:
+          description: Respuesta exitosa
+        401:
+          description: No autorizado
+        500:
+          description: Problemas al obtener el producto
+  /api/products/{pid}:
+    get:
+      summary: Obtiene el producto segun el id
+      tags:
+        - Producto
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: _id del producto segun mongoDB 
+          schema: 
+            $type: String
+      responses:
+        200:
+          description: Respuesta exitosa
+          content:
+            aplication/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/Producto'
+        500:
+          description: Problemas al obtener el producto
+    put:
+      summary: Actualiza el producto segun el id
+      tags:
+        - Producto
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: _id del producto segun mongoDB 
+          schema: 
+            $type: String
+      requestBody:
+        content:
+          application/json:
+            example:
+                title: Néctar Guallarauco Mango
+                description: Néctar Guallarauco Mango 0% Azúcar Añadida 1 L
+                code: BIGF
+                price: 1000
+                stock: 66
+                status: true
+                category: Bebestible
+                thumbnails: []
+      responses:
+        200:
+          description: Respuesta exitosa
+          content:
+            aplication/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/ProductoPut'
+        401:
+          description: No autorizado
+        500:
+          description: Problemas al obtener el producto
+    delete:
+      summary: Borra el producto segun el id
+      tags:
+        - Producto
+      parameters:
+        - name: pid
+          in: path
+          required: true
+          description: _id del producto segun mongoDB 
+          schema: 
+            $type: String
+      responses:
+        200:
+          description: Respuesta exitosa
+          content:
+            aplication/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/SuccessCarrito'
+        401:
+          description: No autorizado
+        500:
+          description: Problemas al obtener el producto
+  /api/products/limit/{limit}/page/{page}/sort/{sort}/query/{query}:
+    get:
+      summary: Obtiene un listado de productos segun los parametros de busqueda
+      tags:
+        - Producto
+      parameters:
+        - name: limit
+          in: path
+          required: false
+          description: limite de cantidad de productos por pagina
+          schema: 
+            $type: Number
+          examples:
+            example-1:
+              summary: Ejemplo cantidad de productos por pagina
+              value: '10'
+        - name: page
+          in: path
+          required: false
+          description: numero de la paginacion
+          schema: 
+            $type: Number
+          examples:
+            example-1:
+              summary: Ejemplo pagina
+              value: '1'
+        - name: sort
+          in: path
+          required: false
+          description: devolver en orden asendende (1) o desencente (-1)
+          schema: 
+            $type: Number
+          examples:
+            example-1:
+              summary: Ejemplo asendente
+              value: '1'
+            example:
+              summary: Ejemplo desendente
+              value: '-1'
+        - name: query
+          in: path
+          required: false
+          examples:
+            example-1:
+              summary: Ejemplo de filtro
+              value: 'category:Limpieza'
+          description: filtro de busqueda para los productos
+          schema: 
+            $type: String
+      responses:
+        200:
+          description: Respuesta exitosa
+          content:
+            aplication/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/ProductoPaginado'
+        500:
+          description: Problemas al obtener el producto
+
+components:
+  schemas:
+    Producto:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: Id autogenerado de mongo
+        title:
+          type: String
+          description: Nombre del producto
+        description:
+          type: String
+          description: Descripcion del producto
+        code:
+          type: String
+          description: Codigo del producto
+        price:
+          type: Number
+          description: Precio del producto
+        status:
+          type: Boolean
+          description: Status del producto
+        stock:
+          type: Number
+          description: stock del producto
+        category:
+          type: string
+          description: categoria del producto
+        thumbnails:
+          type: Array
+          description: lista de direcciones de imagenes del producto
+      example:
+        _id: 655942524ab8e1b9f8fa14e2
+        title: Néctar Guallarauco Mango
+        description: Néctar Guallarauco Mango 0% Azúcar Añadida 1 L
+        code: BIGF
+        price: 1000
+        status: true
+        stock: 66
+        category: Bebestible
+        thumbnails: []
+
+    ProductoPut:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: Id autogenerado de mongo
+        title:
+          type: String
+          description: Nombre del producto
+        description:
+          type: String
+          description: Descripcion del producto
+        code:
+          type: String
+          description: Codigo del producto
+        price:
+          type: Number
+          description: Precio del producto
+        status:
+          type: Boolean
+          description: Status del producto
+        stock:
+          type: Number
+          description: stock del producto
+        category:
+          type: string
+          description: categoria del producto
+        thumbnails:
+          type: Array
+          description: lista de direcciones de imagenes del producto
+        __v:
+          type: Number
+          description: version segun mongo
+      example:
+        _id: 655942524ab8e1b9f8fa14e2
+        title: Néctar Guallarauco Mango
+        description: Néctar Guallarauco Mango 0% Azúcar Añadida 1 L
+        code: BIGF
+        price: 1000
+        status: true
+        stock: 66
+        category: Bebestible
+        thumbnails: []
+        __v: 0
+
+    ProductoPaginado:
+      type: object
+      properties:
+        status:
+          type: String
+          description: status de la respuesta
+        payload:
+          type: array
+          description: lista de productos
+          items:
+            type: object
+            properties:
+              _id:
+                type: ObjectId
+                description: Id autogenerado de mongo
+              title:
+                type: String
+                description: Nombre del producto
+              description:
+                type: String
+                description: Descripcion del producto
+              code:
+                type: String
+                description: Codigo del producto
+              price:
+                type: Number
+                description: Precio del producto
+              status:
+                type: Boolean
+                description: Status del producto
+              stock:
+                type: Number
+                description: stock del producto
+              category:
+                type: string
+                description: categoria del producto
+              thumbnails:
+                type: Array
+                description: lista de direcciones de imagenes del producto
+        totalPages:
+          type: Number
+          description: Total de paginas
+        prevPage:
+          type: Number
+          description: Numero de la pagina previa, de no tener el valor es null
+        nextPage:
+          type: Number
+          description: Numero de la pagina siguiente, de no tener el valor es null
+        page:
+          type: Number
+          description: Numero de la pagina actual
+        hasPrevPage:
+          type: Boolean
+          description: Booleano que informa si existe una pagina anterior
+        hasNextPage:
+          type: Boolean
+          description: Booleano que informa si existe una siguente pagina
+        prevLink:
+          type: String
+          description: link para consultar la pagina anterior desde el menu
+        nextLink:
+          type: String
+          description: link para consultar la siguente pagina desde el menu
+      example:
+        status: success
+        payload: [
+          {
+            _id: 654fc32cc7d731a6536ffa9c,
+            title: Papel Higiénico Confort,
+            description: Papel Higiénico Confort Doble Hoja 25 m 40 un.,
+            code: PHCD,
+            price: 14000,
+            status: true,
+            stock: 50,
+            category: Limpieza,
+            thumbnails: [],
+            __v: 0,
+            id: 654fc32cc7d731a6536ffa9c
+          },
+          {
+            _id: 654fc2b5c7d731a6536ffa98,
+            title: Detergente Ariel,
+            description: Detergente Líquido Ariel Concentrado 2.8 L,
+            code: DLAC,
+            price: 13000,
+            status: true,
+            stock: 32,
+            category: Limpieza,
+            thumbnails: [],
+            __v: 0,
+            id: 654fc2b5c7d731a6536ffa98
+          }
+        ]
+        totalPages: 2
+        prevPage: null
+        nextPage: 2
+        page: 1
+        hasPrevPage: false
+        hasNextPage: true
+        prevLink: null
+        nextLink: http://localhost:8080/products?limit=2&page=2&sort=-1&query=category:Limpieza

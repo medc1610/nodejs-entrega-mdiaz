@@ -1,0 +1,11 @@
+
+<form action="{{host}}/api/session/restablecerpass/{{token}}"  method="post">
+  
+  <br>
+  <input name="newPass" placeholder="New password" />
+  <br>
+   {{#if error}}
+    <h3>La contraseña debe ser distinta a la actual</h3>
+   {{/if}}   
+  <button value="submit">Logear</button>
+</form>

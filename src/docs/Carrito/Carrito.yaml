@@ -1,0 +1,316 @@
+paths:
+  /api/carts/:
+    post:
+      summary: Crea un carrito
+      tags:
+        - Carrito
+      responses:
+        200:
+          description: Respuesta exitosa
+          content:
+            aplication/json:
+              schema:
+                $ref: '#components/schemas/CrearCarrito'
+        401:
+          description: No autorizado
+        500:
+          description: Problemas al obtener el carrito
+  /api/carts/{id}:
+    get:
+      summary: Obtiene el carrito segun el id
+      tags:
+        - Carrito
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: _id autogenerado de mongo 
+          schema: 
+            $type: String
+      responses:
+        200:
+          description: Respuesta exitosa
+          content:
+            aplication/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/CrearCarrito'
+        401:
+          description: No autorizado
+        500:
+          description: Problemas al obtener el carrito
+    put:
+      summary: Actualiza el carrito segun el id
+      tags:
+        - Carrito
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: _id autogenerado de mongo 
+          schema: 
+            $type: String
+      requestBody:
+        content:
+          application/json:
+            example:
+              products:
+                - product: "654fbf46c7d731a6536ffa84"
+                  quantity: 6
+      responses:
+        200:
+          description: Respuesta exitosa
+          content:
+            aplication/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/SuccessCarrito'
+        401:
+          description: No autorizado
+        500:
+          description: Problemas al obtener el carrito
+    delete:
+      summary: Elimina un carrito segun el id
+      tags:
+        - Carrito
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: _id autogenerado de mongo 
+          schema: 
+            $type: String
+      responses:
+        200:
+          description: Respuesta exitosa
+          content:
+            aplication/json:
+              schema:
+                $ref: '#components/schemas/SuccessCarrito'
+        401:
+          description: No autorizado
+        500:
+          description: Problemas al obtener el carrito
+  /api/carts/{cid}/product/{pid}:
+    post:
+      summary: Agrega un producto del carrito especifico, si existe le suma 1 al stock del carrito
+      tags:
+        - Carrito
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: _id autogenerado de mongo de un carrito
+          schema: 
+            $type: String
+        - name: pid
+          in: path
+          required: true
+          description: _id autogenerado de mongo de un produco
+          schema: 
+            $type: String
+      responses:
+        200:
+          description: Respuesta exitosa
+          content:
+            aplication/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/AgregarProductoCarrito'
+        401:
+          description: No autorizado
+        500:
+          description: Problemas al obtener el carrito
+    put:
+      summary: Actualiza un producto del carrito especifico
+      tags:
+        - Carrito
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: _id autogenerado de mongo de un carrito
+          schema: 
+            $type: String
+        - name: pid
+          in: path
+          required: true
+          description: _id autogenerado de mongo de un produco
+          schema: 
+            $type: String
+      requestBody:
+        content:
+          application/json:
+            example:
+              quantity: 48
+      responses:
+        200:
+          description: Respuesta exitosa
+          content:
+            aplication/json:
+              schema:
+                $ref: '#components/schemas/SuccessCarrito'
+        401:
+          description: No autorizado
+        500:
+          description: Problemas al obtener el carrito
+    delete:
+      summary: elimina un producto del carrito especifico
+      tags:
+        - Carrito
+      parameters:
+        - name: cid
+          in: path
+          required: true
+          description: _id autogenerado de mongo de un carrito
+          schema: 
+            $type: String
+        - name: pid
+          in: path
+          required: true
+          description: _id autogenerado de mongo de un produco
+          schema: 
+            $type: String
+      responses:
+        200:
+          description: Respuesta exitosa
+          content:
+            aplication/json:
+              schema:
+                $ref: '#components/schemas/SuccessCarrito'
+        401:
+          description: No autorizado
+        500:
+          description: Problemas al obtener el carrito
+  
+
+components:
+  schemas:
+    Carrito:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: Id autogenerado de mongo
+        title:
+          type: String
+          description: Nombre del producto
+        description:
+          type: String
+          description: Descripcion del producto
+        code:
+          type: String
+          description: Codigo del producto
+        price:
+          type: Number
+          description: Precio del producto
+        status:
+          type: Boolean
+          description: Status del producto
+        stock:
+          type: Number
+          description: stock del producto
+        category:
+          type: string
+          description: categoria del producto
+        thumbnails:
+          type: Array
+          description: lista de direcciones de imagenes del producto
+      example:
+        _id: 655942524ab8e1b9f8fa14e2
+        title: Néctar Guallarauco Mango
+        description: Néctar Guallarauco Mango 0% Azúcar Añadida 1 L
+        code: BIGF
+        price: 1000
+        status: true
+        stock: 66
+        category: Bebestible
+        thumbnails: []
+
+    UpdateProductoEnCarrito:
+        type: object
+        properties: 
+          products:
+            type: array
+            description: lista de productos con id y su cantidad
+            items:
+              type: object
+              properties:
+                product:
+                  type: string
+                  description: ID del producto
+                quantity:
+                  type: integer
+                  description: Cantidad del producto
+        example:
+          products: [
+              {
+                product: 650604dee4ddea4330fd8982,
+                quantity: 6
+              }
+            ]
+
+    CrearCarrito:
+        type: object
+        description: Carrito creado sin productos asociados
+        properties:
+          _id:
+            type: string
+            description: id generado por mongo
+          products:
+            type: array
+            description: lista de productos del carrito
+          __v:
+            type: number
+            description: numero de version generado por mongo
+        example:
+            _id: 6577a94cfd77a7ee3e5043ca
+            products: []
+            __v: 0
+
+    SuccessCarrito:
+        type: object
+        description: Carrito creado sin productos asociados
+        example:
+            acknowledged: true
+            modifiedCount: 0
+            upsertedId: null
+            upsertedCount: 0
+            matchedCount: 1
+    
+    AgregarProductoCarrito:
+        type: object
+        description: Carrito creado sin productos asociados
+        properties:
+          _id:
+            type: string
+            description: id generado por mongo
+          products:
+            type: array
+            description: lista de productos del carrito
+          __v:
+            type: number
+            description: numero de version generado por mongo
+        example:
+          {
+            _id: 6577b2e689cd6f371eda5bca,
+            products: [
+              {
+                product: 650604dee4ddea4330fd8982,
+                quantity: 6,
+                _id: 6577b2f189cd6f371eda5bcd
+              },
+              {
+                product: 654fbf46c7d731a6536ffa84,
+                quantity: 1,
+                _id: 6577b463089b408e90a07b4b
+              }
+            ],
+            __v: 0
+          }
+
+
+   
