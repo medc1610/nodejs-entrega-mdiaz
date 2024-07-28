@@ -50,7 +50,7 @@ sessionRouter.post('/signup',isLogged,
 sessionRouter.get('/logout', async (req, res) => {  
   await userManager.updateLastConnection(req.session.email);
   req.session.destroy();
-  res.redirect('/login');
+  res.redirect('/');
 });
 
 

@@ -4,27 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8cdc279b-ab6d-4f2f-b806-a601b896f30e" name="Changes" comment="error">
-      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/passport.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/passport.config.js" afterDir="false" />
+    <list default="true" id="5c0ccca4-72b0-43b3-8cff-9e8df98d9151" name="Changes" comment="ProyectoFinal">
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/logs/erros.log" beforeDir="false" afterPath="$PROJECT_DIR$/src/logs/erros.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/router/viewsRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/viewsRouter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/home.handlebars" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/home.handlebars" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/router/sessionRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/sessionRouter.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="main" />
-      </map>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
     </option>
+  </component>
+  <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -35,36 +33,41 @@
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/Adrian-Benavides/Curso-Backend-CoderHouse-PFinal.git&quot;,
+    &quot;url&quot;: &quot;https://github.com/medc1610/nodejs-entrega-mdiaz.git&quot;,
     &quot;accountId&quot;: &quot;bfd3d84a-1d08-403f-8c6f-11edcdde87bf&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 8
+  &quot;associatedIndex&quot;: 7
 }</component>
-  <component name="ProjectId" id="2jr3Q4rJkpFa2nIPqelK0jTDlMM" />
+  <component name="ProjectId" id="2gyO18dXW1gOuSvmwo1h7vxsn9T" />
   <component name="ProjectViewState">
     <option name="autoscrollFromSource" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
-    "git-widget-placeholder": "main2",
-    "last_opened_file_path": "C:/Users/medc1/OneDrive/Documentos/Programacion/CoderHouse/adrian/Curso-Backend-CoderHouse-PFinal/src/dao/models",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/medc1/OneDrive/Documentos/Programacion/CoderHouse/NodeJs/nodejs-entrega-mdiaz/test&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;F:\\WebStorm 2024.1.2\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\medc1\OneDrive\Documentos\Programacion\CoderHouse\adrian\Curso-Backend-CoderHouse-PFinal\src\dao\models" />
-      <recent name="C:\Users\medc1\OneDrive\Documentos\Programacion\CoderHouse\adrian\Curso-Backend-CoderHouse-PFinal\src\config" />
+      <recent name="C:\Users\medc1\OneDrive\Documentos\Programacion\CoderHouse\NodeJs\nodejs-entrega-mdiaz\test" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\medc1\OneDrive\Documentos\Programacion\CoderHouse\NodeJs\nodejs-entrega-mdiaz\test" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -77,28 +80,89 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="8cdc279b-ab6d-4f2f-b806-a601b896f30e" name="Changes" comment="" />
-      <created>1722131348816</created>
+      <changelist id="5c0ccca4-72b0-43b3-8cff-9e8df98d9151" name="Changes" comment="" />
+      <created>1716666135136</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1722131348816</updated>
-      <workItem from="1722131350897" duration="7000" />
-      <workItem from="1722131368028" duration="2102000" />
-      <workItem from="1722134078352" duration="3443000" />
+      <updated>1716666135136</updated>
+      <workItem from="1716666137992" duration="10056000" />
+      <workItem from="1716774089107" duration="10000" />
+      <workItem from="1717217292181" duration="608000" />
+      <workItem from="1717356397913" duration="45000" />
+      <workItem from="1717385393208" duration="2674000" />
+      <workItem from="1717458217738" duration="7015000" />
+      <workItem from="1717644606102" duration="120000" />
+      <workItem from="1717644821767" duration="1681000" />
+      <workItem from="1717875447021" duration="7758000" />
+      <workItem from="1717955311664" duration="18237000" />
+      <workItem from="1718421498611" duration="2532000" />
+      <workItem from="1718468150276" duration="3349000" />
+      <workItem from="1718555038168" duration="919000" />
+      <workItem from="1718755468237" duration="1621000" />
+      <workItem from="1718850578526" duration="634000" />
+      <workItem from="1718851254930" duration="10723000" />
+      <workItem from="1719770524262" duration="721000" />
+      <workItem from="1719771664799" duration="8903000" />
+      <workItem from="1720999075713" duration="17000" />
+      <workItem from="1722131324511" duration="33000" />
+      <workItem from="1722131378579" duration="6385000" />
     </task>
-    <task id="LOCAL-00001" summary="error">
+    <task id="LOCAL-00001" summary="Logger">
       <option name="closed" value="true" />
-      <created>1722134121630</created>
+      <created>1716693818164</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1722134121630</updated>
+      <updated>1716693818164</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="nodemailer">
+      <option name="closed" value="true" />
+      <created>1717464023027</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1717464023027</updated>
+    </task>
+    <task id="LOCAL-00003" summary="user premium">
+      <option name="closed" value="true" />
+      <created>1717467693841</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1717467693841</updated>
+    </task>
+    <task id="LOCAL-00004" summary="test">
+      <option name="closed" value="true" />
+      <created>1718863515652</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1718863515652</updated>
+    </task>
+    <task id="LOCAL-00005" summary="pre entrega">
+      <option name="closed" value="true" />
+      <created>1719805314232</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1719805314232</updated>
+    </task>
+    <task id="LOCAL-00006" summary="ProyectoFinal">
+      <option name="closed" value="true" />
+      <created>1722138164551</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1722138164551</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -112,7 +176,12 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="error" />
-    <option name="LAST_COMMIT_MESSAGE" value="error" />
+    <MESSAGE value="Logger" />
+    <MESSAGE value="nodemailer" />
+    <MESSAGE value="user premium" />
+    <MESSAGE value="test" />
+    <MESSAGE value="pre entrega" />
+    <MESSAGE value="ProyectoFinal" />
+    <option name="LAST_COMMIT_MESSAGE" value="ProyectoFinal" />
   </component>
 </project>
